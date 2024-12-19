@@ -1,9 +1,10 @@
-import { UserButton, auth } from "@clerk/nextjs";
+import { UserButton} from "@clerk/nextjs";
+import { auth } from '@clerk/nextjs/server'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default async function DashboardPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   return (
     <div className="max-w-6xl mx-auto">
