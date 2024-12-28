@@ -2,12 +2,32 @@ import { UserButton} from "@clerk/nextjs";
 import { auth } from '@clerk/nextjs/server'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
+  
+  // TODO: Replace this with actual profile check from database
+  const isProfileSetup = false;
 
   return (
     <div className="max-w-6xl mx-auto">
+      {!isProfileSetup && (
+        <Card className="p-4 mb-8 bg-yellow-50 border-yellow-200">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h3 className="font-medium">Complete Your Profile</h3>
+              <p className="text-sm text-gray-600">Set up your business profile to start accepting bookings</p>
+            </div>
+            <Button asChild>
+              <Link href="/dashboard/profile">
+                Complete Setup
+              </Link>
+            </Button>
+          </div>
+        </Card>
+      )}
+
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
