@@ -4,51 +4,60 @@ import { Doc, Id } from "./_generated/dataModel";
 
 export const createProvider = mutation({
   args: {
-    userId: v.string(),
     name: v.string(),
     businessName: v.string(),
+    bio: v.optional(v.string()),
     contactEmail: v.string(),
     timezone: v.string(),
     customUrl: v.string(),
   },
   handler: async (ctx, args) => {
-    // Check if provider already exists
-    const existing = await ctx.db
-      .query("providers")
-      .withIndex("by_userId", (q) => q.eq("userId", args.userId))
-      .first();
-
-    if (existing) {
-      throw new Error("Provider already exists");
+    const identity = await ctx.auth.getUserIdentity();
+    
+    if (!identity) {
+      throw new Error("Not authenticated");
     }
 
-    // Check if custom URL is taken
-    const urlExists = await ctx.db
+    const userId = identity.subject;
+
+    // Check if provider already exists
+    const existingProvider = await ctx.db
+      .query("providers")
+      .withIndex("by_userId", (q) => q.eq("userId", userId))
+      .first();
+
+    if (existingProvider) {
+      throw new Error("Provider profile already exists");
+    }
+
+    // Check if customUrl is unique
+    const existingUrl = await ctx.db
       .query("providers")
       .withIndex("by_customUrl", (q) => q.eq("customUrl", args.customUrl))
       .first();
 
-    if (urlExists) {
-      throw new Error("Custom URL is already taken");
+    if (existingUrl) {
+      throw new Error("Custom URL already taken");
     }
 
     return await ctx.db.insert("providers", {
-      userId: args.userId,
-      name: args.name,
-      businessName: args.businessName,
-      contactEmail: args.contactEmail,
-      timezone: args.timezone,
-      customUrl: args.customUrl,
+      userId,
+      ...args,
     });
   },
 });
 
 export const getProvider = query({
-  args: { userId: v.string() },
-  handler: async (ctx, args) => {
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    
+    if (!identity) {
+      return null;
+    }
+
     return await ctx.db
       .query("providers")
-      .withIndex("by_userId", (q) => q.eq("userId", args.userId))
+      .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
       .first();
   },
 });
