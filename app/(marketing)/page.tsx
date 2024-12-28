@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+
   return (
     <div className="flex items-center justify-center flex-col">
       <div className="flex items-center justify-center flex-col">
@@ -12,11 +16,19 @@ export default function Home() {
           Create your personalized booking page and let your clients schedule appointments seamlessly. Perfect for consultants, coaches, and service providers.
         </p>
         <div className="flex gap-4">
-          <SignInButton mode="modal">
-            <Button size="lg">
-              Get Started
+          {userId ? (
+            <Button asChild size="lg">
+              <Link href="/dashboard">
+                Get Started
+              </Link>
             </Button>
-          </SignInButton>
+          ) : (
+            <SignInButton mode="modal" afterSignInUrl="/dashboard">
+              <Button size="lg">
+                Get Started
+              </Button>
+            </SignInButton>
+          )}
           <Button variant="outline" size="lg">
             Learn More
           </Button>
