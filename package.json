@@ -11,7 +11,8 @@
     "journey1": "node scripts/journey1.js",
     "journey2": "node scripts/journey2.js",
     "journey3": "node scripts/journey3.js",
-    "journey4": "node scripts/journey4.js"
+    "journey4": "node scripts/journey4.js",
+    "journey5": "node scripts/journey5.js"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.1",

@@ -42,6 +42,11 @@ export default function DashboardPage() {
           <h3 className="font-semibold mb-2">Quick Actions</h3>
           <div className="space-y-2">
             <Button asChild className="w-full justify-start">
+              <Link href="/dashboard/profile">
+                Edit Profile
+              </Link>
+            </Button>
+            <Button asChild className="w-full justify-start">
               <Link href="/dashboard/availability">
                 Set Availability
               </Link>

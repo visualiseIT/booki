@@ -1,0 +1,10 @@
+[2025-01-19T23:53:02.901Z] 
+=== Journey 5: Customer Booking Flow ===
+[2025-01-19T23:53:02.903Z] Capturing the journey of a customer booking a service
+[2025-01-19T23:53:02.904Z] Steps: Visit → Browse Services → Select → Schedule → Book
+
+[2025-01-19T23:53:03.061Z] Visiting booking page...
+[2025-01-19T23:53:08.561Z] Viewing services...
+[2025-01-19T23:53:08.562Z] Services section not found
+[2025-01-19T23:53:08.562Z] Booking journey captured successfully!
+[2025-01-19T23:53:08.562Z] Page will remain open. Press Enter to close the page...
