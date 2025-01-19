@@ -1,14 +1,15 @@
-import { UserButton} from "@clerk/nextjs";
-import { auth } from '@clerk/nextjs/server'
+"use client";
+
+import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 
-export default async function DashboardPage() {
-  const { userId } = await auth();
-  
-  // TODO: Replace this with actual profile check from database
-  const isProfileSetup = false;
+export default function DashboardPage() {
+  const provider = useQuery(api.providers.getProvider);
+  const isProfileSetup = !!provider;
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -65,9 +66,15 @@ export default async function DashboardPage() {
           <p className="text-sm text-gray-600 mb-4">
             Share this link with your clients to let them book appointments
           </p>
-          <Button variant="outline" className="w-full">
-            Copy Link
-          </Button>
+          {provider ? (
+            <Button variant="outline" className="w-full" onClick={() => {
+              navigator.clipboard.writeText(`booki.com/${provider.customUrl}`);
+            }}>
+              Copy Link
+            </Button>
+          ) : (
+            <p className="text-sm text-yellow-600">Complete your profile to get your booking link</p>
+          )}
         </div>
       </div>
 
