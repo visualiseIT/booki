@@ -1,8 +1,21 @@
+/**
+ * Browser Manager
+ * 
+ * This script starts a persistent browser instance for journey captures.
+ * It creates a websocket endpoint that journey scripts can connect to,
+ * allowing multiple scripts to reuse the same browser session.
+ */
+
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 let browser;
 const wsEndpointFile = '.browser-ws-endpoint';
+
+// Print description
+console.log('\n=== Browser Manager ===');
+console.log('Starting persistent browser instance for journey captures');
+console.log('Use Ctrl+C to stop the browser when finished\n');
 
 async function startBrowser() {
   browser = await puppeteer.launch({

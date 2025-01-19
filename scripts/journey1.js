@@ -1,6 +1,23 @@
+/**
+ * Journey 1: Provider Setup Flow
+ * 
+ * This script captures the journey of a provider setting up their profile:
+ * 1. Landing page and sign up
+ * 2. Dashboard view
+ * 3. Profile setup
+ * 4. Services page (empty state)
+ * 5. Availability page (empty state)
+ */
+
+require('dotenv').config({ path: '.env.local' });
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+
+// Print description
+console.log('\n=== Journey 1: Provider Setup Flow ===');
+console.log('Capturing the journey of a provider setting up their profile');
+console.log('Steps: Landing → Signup → Dashboard → Profile → Services → Availability\n');
 
 async function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -25,7 +42,12 @@ async function captureJourney() {
     deviceScaleFactor: 1,
   });
   
-  const screenshotsDir = path.join(__dirname, '../screenshots');
+  const screenshotsDir = path.join(__dirname, '../screenshots/journey1');
+  
+  // Create screenshots/journey1 directory if it doesn't exist
+  if (!fs.existsSync(screenshotsDir)) {
+    fs.mkdirSync(screenshotsDir, { recursive: true });
+  }
 
   try {
     // 1. Landing Page
