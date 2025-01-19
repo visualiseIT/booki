@@ -1,0 +1,29 @@
+
+[2025-01-19T23:26:20.520Z] Journey 3 log started
+[2025-01-19T23:26:20.521Z] 
+=== Journey 3: Service Setup Flow ===
+[2025-01-19T23:26:20.521Z] Capturing the journey of a provider setting up their services
+[2025-01-19T23:26:20.521Z] Steps: Login → Services → Create Service → Configure → View
+
+[2025-01-19T23:26:20.676Z] Navigating to dashboard...
+[2025-01-19T23:26:54.659Z] Error during service setup journey:
+[2025-01-19T23:26:54.660Z] TimeoutError: Waiting for selector `h1` failed: Waiting failed: 30000ms exceeded
+
+[2025-01-19T23:28:24.132Z] Journey 3 log started
+[2025-01-19T23:28:24.133Z] 
+=== Journey 3: Service Setup Flow ===
+[2025-01-19T23:28:24.133Z] Capturing the journey of a provider setting up their services
+[2025-01-19T23:28:24.133Z] Steps: Login → Services → Create Service → Configure → View
+
+[2025-01-19T23:28:24.281Z] Navigating to dashboard...
+[2025-01-19T23:28:28.281Z] Going to services page...
+[2025-01-19T23:28:31.300Z] Add Service button clicked
+[2025-01-19T23:28:32.414Z] Filling service form...
+[2025-01-19T23:28:32.450Z] Successfully filled #name
+[2025-01-19T23:28:32.521Z] Successfully filled #description
+[2025-01-19T23:28:32.531Z] Successfully filled #duration
+[2025-01-19T23:28:32.539Z] Successfully filled #price
+[2025-01-19T23:28:33.666Z] Saving service...
+[2025-01-19T23:28:33.668Z] Service saved
+[2025-01-19T23:28:35.781Z] Service setup journey captured successfully!
+[2025-01-19T23:28:35.781Z] Page will remain open. Press Enter to close the page...
