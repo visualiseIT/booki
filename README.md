@@ -43,6 +43,12 @@ Booki is a powerful and flexible appointment booking platform that enables servi
    npm run dev
    ```
 
+6. Optionally run Convex locally:
+   ```bash
+   npx convex dev
+   ```
+
+
 ## Deploy Your Own
 
 Deploy your own version of Booki using Vercel:
