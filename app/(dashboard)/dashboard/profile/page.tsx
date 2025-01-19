@@ -1,3 +1,5 @@
+"use client";
+
 import { SignOutButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,8 +10,12 @@ import { auth } from "@clerk/nextjs/server";
 import { api } from "@/convex/_generated/api";
 import { useForm } from "react-hook-form";
 import { useAction, useMutation, useQuery } from "convex/react";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
+  const { toast } = useToast();
+  const router = useRouter();
   const provider = useQuery(api.providers.getProvider);
   const createProvider = useMutation(api.providers.createProvider);
   const updateProvider = useMutation(api.providers.updateProvider);
@@ -35,9 +41,22 @@ export default function ProfilePage() {
       } else {
         await createProvider(data);
       }
-      // TODO: Add success toast
+      
+      toast({
+        title: "Success",
+        description: "Profile saved successfully",
+      });
+
+      // Redirect to dashboard after a short delay
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1500);
     } catch (error) {
-      // TODO: Add error toast
+      toast({
+        title: "Error",
+        description: error.message || "Failed to save profile",
+        variant: "destructive",
+      });
       console.error(error);
     }
   };

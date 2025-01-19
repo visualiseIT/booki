@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function DashboardLayout({
   children,
@@ -20,6 +21,7 @@ export default async function DashboardLayout({
         <main className="h-full pt-20 px-4">
           {children}
         </main>
+        <Toaster />
       </div>
     </ClerkProvider>
   );
