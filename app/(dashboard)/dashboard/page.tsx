@@ -68,7 +68,7 @@ export default function DashboardPage() {
           </p>
           {provider ? (
             <Button variant="outline" className="w-full" onClick={() => {
-              navigator.clipboard.writeText(`booki.com/${provider.customUrl}`);
+              navigator.clipboard.writeText(`https://getmebooked.vercel.app/${provider.customUrl}`);
             }}>
               Copy Link
             </Button>
