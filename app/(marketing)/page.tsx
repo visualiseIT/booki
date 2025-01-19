@@ -23,7 +23,7 @@ export default async function Home() {
               </Link>
             </Button>
           ) : (
-            <SignInButton mode="modal" afterSignInUrl="/dashboard">
+            <SignInButton mode="modal">
               <Button size="lg">
                 Get Started
               </Button>
