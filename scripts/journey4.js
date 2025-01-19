@@ -1,12 +1,12 @@
 /**
- * Journey 3: Service Setup Flow
+ * Journey 4: Availability Setup Flow
  * 
- * This script captures the journey of a provider setting up their services:
+ * This script captures the journey of a provider setting up their availability:
  * 1. Login to dashboard
- * 2. Navigate to services page
- * 3. Create a new service
- * 4. Configure service details
- * 5. Save and verify
+ * 2. Navigate to availability page
+ * 3. Set working hours
+ * 4. Configure days of the week
+ * 5. Save availability settings
  */
 
 require('dotenv').config({ path: '.env.local' });
@@ -21,7 +21,7 @@ if (!fs.existsSync(logsDir)) {
 }
 
 // Create write stream for logging
-const logFile = path.join(logsDir, 'journey3.log');
+const logFile = path.join(logsDir, 'journey4.log');
 const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 
 // Helper function to log both to console and file
@@ -33,15 +33,15 @@ function log(message) {
 }
 
 // Print description
-log('\n=== Journey 3: Service Setup Flow ===');
-log('Capturing the journey of a provider setting up their services');
-log('Steps: Login → Services → Create Service → Configure → View\n');
+log('\n=== Journey 4: Availability Setup Flow ===');
+log('Capturing the journey of a provider setting up their availability');
+log('Steps: Login → Availability → Set Hours → Configure Days → Save\n');
 
 async function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function captureServiceSetupJourney() {
+async function captureAvailabilitySetupJourney() {
   const wsEndpointFile = '.browser-ws-endpoint';
   
   if (!fs.existsSync(wsEndpointFile)) {
@@ -60,7 +60,7 @@ async function captureServiceSetupJourney() {
     deviceScaleFactor: 1,
   });
   
-  const screenshotsDir = path.join(__dirname, '../screenshots/journey3');
+  const screenshotsDir = path.join(__dirname, '../screenshots/journey4');
   
   // Create screenshots directory if it doesn't exist
   if (!fs.existsSync(screenshotsDir)) {
@@ -79,36 +79,36 @@ async function captureServiceSetupJourney() {
       fullPage: true
     });
 
-    // 2. Navigate to services page
-    log('Going to services page...');
-    await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/services`, { waitUntil: 'networkidle0' });
+    // 2. Navigate to availability page
+    log('Going to availability page...');
+    await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/availability`, { waitUntil: 'networkidle0' });
     await delay(1000);
     
     await page.screenshot({
-      path: path.join(screenshotsDir, '2-services-empty.png'),
+      path: path.join(screenshotsDir, '2-availability-empty.png'),
       fullPage: true
     });
 
-    // 3. Click Add Service button
-    const addServiceButton = await page.evaluate(() => {
+    // 3. Click Set Working Hours button
+    const setHoursButton = await page.evaluate(() => {
       const button = Array.from(document.querySelectorAll('button')).find(
-        button => button.textContent?.includes('Add Service')
+        button => button.textContent?.includes('Set Working Hours')
       );
       if (button) button.click();
       return !!button;
     });
 
-    if (addServiceButton) {
-      log('Add Service button clicked');
+    if (setHoursButton) {
+      log('Set Working Hours button clicked');
       await delay(1000);
       
       await page.screenshot({
-        path: path.join(screenshotsDir, '3-service-form.png'),
+        path: path.join(screenshotsDir, '3-hours-form.png'),
         fullPage: true
       });
 
-      // 4. Fill service form
-      log('Filling service form...');
+      // 4. Configure working hours
+      log('Configuring working hours...');
       
       // Helper function to safely type into an input
       async function safeType(selector, value) {
@@ -121,23 +121,25 @@ async function captureServiceSetupJourney() {
         }
       }
 
-      // Generate a unique service name with timestamp
-      const timestamp = new Date().toISOString().slice(11, 19).replace(/:/g, '');
-      const serviceName = `Test Service ${timestamp}`;
-
-      await safeType('#name', serviceName);
-      await safeType('#description', 'A test service for demonstration purposes.');
-      await safeType('#duration', '60');
-      await safeType('#price', '100');
+      // Set Monday-Friday, 9 AM to 5 PM
+      const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+      for (const day of days) {
+        const isAvailableCheckbox = await page.$(`#${day}-available`);
+        if (isAvailableCheckbox) {
+          await isAvailableCheckbox.click();
+          await safeType(`#${day}-start`, '09:00');
+          await safeType(`#${day}-end`, '17:00');
+        }
+      }
       
       await delay(1000);
       await page.screenshot({
-        path: path.join(screenshotsDir, '4-form-filled.png'),
+        path: path.join(screenshotsDir, '4-hours-filled.png'),
         fullPage: true
       });
 
-      // 5. Save service
-      log('Saving service...');
+      // 5. Save availability
+      log('Saving availability...');
       const saveButton = await page.evaluate(() => {
         const button = Array.from(document.querySelectorAll('button')).find(
           button => button.textContent?.includes('Save')
@@ -147,27 +149,27 @@ async function captureServiceSetupJourney() {
       });
 
       if (saveButton) {
-        log('Service saved');
+        log('Availability saved');
         await delay(2000);
         
         await page.screenshot({
-          path: path.join(screenshotsDir, '5-service-saved.png'),
+          path: path.join(screenshotsDir, '5-availability-saved.png'),
           fullPage: true
         });
       } else {
         log('Save button not found');
       }
     } else {
-      log('Add Service button not found');
+      log('Set Working Hours button not found');
     }
 
-    log('Service setup journey captured successfully!');
+    log('Availability setup journey captured successfully!');
     log('Page will remain open. Press Enter to close the page...');
     
     // Wait for user input before closing
     await new Promise(resolve => process.stdin.once('data', resolve));
   } catch (error) {
-    log('Error during service setup journey:');
+    log('Error during availability setup journey:');
     log(error.toString());
   } finally {
     await page.close();
@@ -176,4 +178,4 @@ async function captureServiceSetupJourney() {
   }
 }
 
-captureServiceSetupJourney(); 
+captureAvailabilitySetupJourney(); 

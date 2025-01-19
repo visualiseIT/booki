@@ -1,0 +1,23 @@
+[2025-01-19T23:46:37.216Z] 
+=== Journey 4: Availability Setup Flow ===
+[2025-01-19T23:46:37.217Z] Capturing the journey of a provider setting up their availability
+[2025-01-19T23:46:37.217Z] Steps: Login → Availability → Set Hours → Configure Days → Save
+
+[2025-01-19T23:46:37.371Z] Navigating to dashboard...
+[2025-01-19T23:46:40.767Z] Going to availability page...
+[2025-01-19T23:46:43.688Z] Set Working Hours button clicked
+[2025-01-19T23:46:44.864Z] Configuring working hours...
+[2025-01-19T23:46:44.903Z] Successfully filled #monday-start
+[2025-01-19T23:46:44.913Z] Successfully filled #monday-end
+[2025-01-19T23:46:44.949Z] Successfully filled #tuesday-start
+[2025-01-19T23:46:44.960Z] Successfully filled #tuesday-end
+[2025-01-19T23:46:44.981Z] Successfully filled #wednesday-start
+[2025-01-19T23:46:44.992Z] Successfully filled #wednesday-end
+[2025-01-19T23:46:45.013Z] Successfully filled #thursday-start
+[2025-01-19T23:46:45.024Z] Successfully filled #thursday-end
+[2025-01-19T23:46:45.050Z] Successfully filled #friday-start
+[2025-01-19T23:46:45.059Z] Successfully filled #friday-end
+[2025-01-19T23:46:46.208Z] Saving availability...
+[2025-01-19T23:46:46.215Z] Availability saved
+[2025-01-19T23:46:48.358Z] Availability setup journey captured successfully!
+[2025-01-19T23:46:48.358Z] Page will remain open. Press Enter to close the page...

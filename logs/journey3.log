@@ -1,29 +1,36 @@
 
-[2025-01-19T23:26:20.520Z] Journey 3 log started
-[2025-01-19T23:26:20.521Z] 
+[2025-01-19T23:43:00.386Z] Journey 3 log started
+[2025-01-19T23:43:00.387Z] 
 === Journey 3: Service Setup Flow ===
-[2025-01-19T23:26:20.521Z] Capturing the journey of a provider setting up their services
-[2025-01-19T23:26:20.521Z] Steps: Login → Services → Create Service → Configure → View
+[2025-01-19T23:43:00.387Z] Capturing the journey of a provider setting up their services
+[2025-01-19T23:43:00.387Z] Steps: Login → Services → Create Service → Configure → View
 
-[2025-01-19T23:26:20.676Z] Navigating to dashboard...
-[2025-01-19T23:26:54.659Z] Error during service setup journey:
-[2025-01-19T23:26:54.660Z] TimeoutError: Waiting for selector `h1` failed: Waiting failed: 30000ms exceeded
-
-[2025-01-19T23:28:24.132Z] Journey 3 log started
-[2025-01-19T23:28:24.133Z] 
+[2025-01-19T23:43:00.537Z] Navigating to dashboard...
+[2025-01-19T23:43:04.093Z] Going to services page...
+[2025-01-19T23:43:07.110Z] Add Service button clicked
+[2025-01-19T23:43:08.259Z] Filling service form...
+[2025-01-19T23:43:08.330Z] Successfully filled #name
+[2025-01-19T23:43:08.410Z] Successfully filled #description
+[2025-01-19T23:43:08.420Z] Successfully filled #duration
+[2025-01-19T23:43:08.428Z] Successfully filled #price
+[2025-01-19T23:43:09.577Z] Saving service...
+[2025-01-19T23:43:09.583Z] Service saved
+[2025-01-19T23:43:11.712Z] Service setup journey captured successfully!
+[2025-01-19T23:43:11.712Z] Page will remain open. Press Enter to close the page...
+[2025-01-19T23:46:02.170Z] 
 === Journey 3: Service Setup Flow ===
-[2025-01-19T23:28:24.133Z] Capturing the journey of a provider setting up their services
-[2025-01-19T23:28:24.133Z] Steps: Login → Services → Create Service → Configure → View
+[2025-01-19T23:46:02.172Z] Capturing the journey of a provider setting up their services
+[2025-01-19T23:46:02.172Z] Steps: Login → Services → Create Service → Configure → View
 
-[2025-01-19T23:28:24.281Z] Navigating to dashboard...
-[2025-01-19T23:28:28.281Z] Going to services page...
-[2025-01-19T23:28:31.300Z] Add Service button clicked
-[2025-01-19T23:28:32.414Z] Filling service form...
-[2025-01-19T23:28:32.450Z] Successfully filled #name
-[2025-01-19T23:28:32.521Z] Successfully filled #description
-[2025-01-19T23:28:32.531Z] Successfully filled #duration
-[2025-01-19T23:28:32.539Z] Successfully filled #price
-[2025-01-19T23:28:33.666Z] Saving service...
-[2025-01-19T23:28:33.668Z] Service saved
-[2025-01-19T23:28:35.781Z] Service setup journey captured successfully!
-[2025-01-19T23:28:35.781Z] Page will remain open. Press Enter to close the page...
+[2025-01-19T23:46:02.318Z] Navigating to dashboard...
+[2025-01-19T23:46:05.755Z] Going to services page...
+[2025-01-19T23:46:08.672Z] Add Service button clicked
+[2025-01-19T23:46:09.804Z] Filling service form...
+[2025-01-19T23:46:09.841Z] Successfully filled #name
+[2025-01-19T23:46:09.889Z] Successfully filled #description
+[2025-01-19T23:46:09.899Z] Successfully filled #duration
+[2025-01-19T23:46:09.908Z] Successfully filled #price
+[2025-01-19T23:46:11.038Z] Saving service...
+[2025-01-19T23:46:11.043Z] Service saved
+[2025-01-19T23:46:13.173Z] Service setup journey captured successfully!
+[2025-01-19T23:46:13.173Z] Page will remain open. Press Enter to close the page...
