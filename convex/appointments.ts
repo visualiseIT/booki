@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
+import { getUser } from "./providers";
 
 export const createAppointment = mutation({
   args: {
@@ -94,14 +95,29 @@ export const updateAppointmentStatus = mutation({
 });
 
 export const getUpcomingAppointments = query({
-  args: { providerId: v.id("providers") },
-  handler: async (ctx, args) => {
-    const now = new Date().toISOString();
-    return await ctx.db
+  args: {},
+  async handler(ctx) {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return null;
+
+    const provider = await ctx.db
+      .query("providers")
+      .withIndex("by_userId", (q) => q.eq("userId", identity.subject))
+      .first();
+    
+    if (!provider) return null;
+
+    const appointments = await ctx.db
       .query("appointments")
-      .withIndex("by_providerId", (q) => q.eq("providerId", args.providerId))
-      .filter((q) => q.gt(q.field("startTime"), now))
-      .order("asc")
+      .withIndex("by_providerId", (q) => q.eq("providerId", provider._id))
+      .filter((q) => q.eq(q.field("status"), "confirmed"))
+      .order("desc")
       .collect();
+
+    return appointments.map(appointment => ({
+      ...appointment,
+      date: appointment.startTime.split('T')[0],
+      time: appointment.startTime.split('T')[1].substring(0, 5)
+    }));
   },
 }); 

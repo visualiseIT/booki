@@ -47,13 +47,19 @@ export const createProvider = mutation({
   },
 });
 
+export async function getUser(ctx: any) {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    return null;
+  }
+  return identity;
+}
+
 export const getProvider = query({
-  handler: async (ctx) => {
+  args: {},
+  async handler(ctx) {
     const identity = await ctx.auth.getUserIdentity();
-    
-    if (!identity) {
-      return null;
-    }
+    if (!identity) return null;
 
     return await ctx.db
       .query("providers")

@@ -3,9 +3,8 @@
  * 
  * This script captures the journey of a provider managing appointments:
  * 1. Login to dashboard
- * 2. View upcoming appointments
- * 3. Click on an appointment to see details
- * 4. View customer information and booking details
+ * 2. View upcoming appointments (or empty state)
+ * 3. View stats and quick actions
  */
 
 require('dotenv').config({ path: '.env.local' });
@@ -77,41 +76,60 @@ async function captureAppointmentManagementJourney() {
     
     // Wait for dashboard to load
     await page.waitForSelector('h1');
-    await delay(1000);
+    await delay(2000); // Wait for any animations/loading
     await page.screenshot({ path: path.join(screenshotsDir, '1-dashboard.png'), fullPage: true });
     log('Captured dashboard screenshot');
 
-    // Look for appointments section
-    await page.waitForSelector('h2');
-    const appointmentsHeading = await page.evaluate(() => {
-      const headings = Array.from(document.querySelectorAll('h2'));
-      return headings.find(h => h.textContent.includes('Upcoming Appointments'));
+    // Check for stats
+    const stats = await page.evaluate(() => {
+      const totalServices = document.querySelector('[data-testid="total-services"]')?.textContent;
+      const upcomingBookings = document.querySelector('[data-testid="upcoming-bookings"]')?.textContent;
+      return { totalServices, upcomingBookings };
     });
 
-    if (appointmentsHeading) {
-      log('Found appointments section');
-      await page.screenshot({ path: path.join(screenshotsDir, '2-appointments-list.png'), fullPage: true });
+    if (stats.totalServices) {
+      log(`Total services: ${stats.totalServices}`);
+    }
+    if (stats.upcomingBookings) {
+      log(`Upcoming bookings: ${stats.upcomingBookings}`);
+    }
+
+    // Check for quick actions
+    const quickActions = await page.evaluate(() => {
+      const buttons = Array.from(document.querySelectorAll('button'));
+      return buttons.map(b => b.textContent).filter(Boolean);
+    });
+    log(`Quick actions available: ${quickActions.join(', ')}`);
+
+    // Look for appointments section
+    const appointmentsSection = await page.evaluate(() => {
+      const section = document.querySelector('[data-testid="appointments-section"]');
+      if (!section) return null;
       
-      // Click on the first appointment
-      const appointment = await page.waitForSelector('[data-testid="appointment-item"]');
-      await appointment.click();
-      log('Clicked on appointment');
-      
-      // Wait for appointment details to load
-      await page.waitForSelector('[data-testid="appointment-details"]');
-      await page.screenshot({ path: path.join(screenshotsDir, '3-appointment-details.png'), fullPage: true });
-      log('Captured appointment details screenshot');
-      
-      // Check for customer details
-      const customerDetails = await page.evaluate(() => {
-        const details = document.querySelector('[data-testid="appointment-details"]');
-        return details ? details.textContent : null;
-      });
-      
-      if (customerDetails) {
-        log('Found customer details in appointment');
+      const appointments = Array.from(section.querySelectorAll('[data-testid="appointment-item"]'));
+      return {
+        hasAppointments: appointments.length > 0,
+        count: appointments.length
+      };
+    });
+
+    if (appointmentsSection) {
+      if (appointmentsSection.hasAppointments) {
+        log(`Found ${appointmentsSection.count} appointments`);
+        await page.screenshot({ path: path.join(screenshotsDir, '2-appointments-list.png'), fullPage: true });
+        
+        // Click on the first appointment if any exist
+        const appointment = await page.waitForSelector('[data-testid="appointment-item"]');
+        await appointment.click();
+        log('Clicked on appointment');
+        
+        // Take a screenshot after clicking
+        await delay(1000);
+        await page.screenshot({ path: path.join(screenshotsDir, '3-appointment-clicked.png'), fullPage: true });
+        log('Captured appointment click screenshot');
       } else {
-        log('No customer details found');
+        log('No appointments found in the appointments section');
+        await page.screenshot({ path: path.join(screenshotsDir, '2-no-appointments.png'), fullPage: true });
       }
     } else {
       log('No appointments section found');
