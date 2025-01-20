@@ -8,13 +8,22 @@ import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { format } from "date-fns";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useState } from "react";
+import { Id } from "@/convex/_generated/dataModel";
 
 export default function DashboardPage() {
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<Id<"appointments"> | null>(null);
+  
   const provider = useQuery(api.providers.getProvider);
   const appointments = useQuery(api.appointments.getUpcomingAppointments, {});
   const services = useQuery(
     api.services.getServices,
     provider ? { providerId: provider._id } : "skip"
+  );
+  const selectedAppointment = useQuery(
+    api.appointments.getAppointmentDetails,
+    selectedAppointmentId ? { appointmentId: selectedAppointmentId } : "skip"
   );
 
   if (!provider) {
@@ -136,7 +145,11 @@ export default function DashboardPage() {
                       {format(new Date(appointment.date), 'MMMM d, yyyy')} at {appointment.time}
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setSelectedAppointmentId(appointment._id)}
+                  >
                     View Details
                   </Button>
                 </div>
@@ -147,6 +160,50 @@ export default function DashboardPage() {
           )}
         </div>
       </Card>
+
+      {/* Appointment Details Dialog */}
+      <Dialog 
+        open={selectedAppointmentId !== null} 
+        onOpenChange={(open) => !open && setSelectedAppointmentId(null)}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Appointment Details</DialogTitle>
+          </DialogHeader>
+          <div className="mt-4 space-y-4" data-testid="appointment-details">
+            {selectedAppointment && (
+              <>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Service</h3>
+                  <p className="mt-1">{selectedAppointment.service.name}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Customer</h3>
+                  <p className="mt-1">{selectedAppointment.customerName}</p>
+                  <p className="text-sm text-gray-500">{selectedAppointment.customerEmail}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Date & Time</h3>
+                  <p className="mt-1">
+                    {format(new Date(selectedAppointment.date), 'MMMM d, yyyy')} at {selectedAppointment.time}
+                  </p>
+                  <p className="text-sm text-gray-500">Duration: {selectedAppointment.service.duration} minutes</p>
+                </div>
+                {selectedAppointment.notes && (
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-500">Notes</h3>
+                    <p className="mt-1 text-sm">{selectedAppointment.notes}</p>
+                  </div>
+                )}
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Status</h3>
+                  <p className="mt-1 capitalize">{selectedAppointment.status}</p>
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

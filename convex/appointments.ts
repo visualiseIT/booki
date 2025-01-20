@@ -120,4 +120,23 @@ export const getUpcomingAppointments = query({
       time: appointment.startTime.split('T')[1].substring(0, 5)
     }));
   },
+});
+
+export const getAppointmentDetails = query({
+  args: { appointmentId: v.id("appointments") },
+  async handler(ctx, args) {
+    const appointment = await ctx.db.get(args.appointmentId);
+    if (!appointment) return null;
+
+    // Get the associated service
+    const service = await ctx.db.get(appointment.serviceId);
+    if (!service) return null;
+
+    return {
+      ...appointment,
+      service,
+      date: appointment.startTime.split('T')[0],
+      time: appointment.startTime.split('T')[1].substring(0, 5)
+    };
+  },
 }); 
