@@ -1,0 +1,22 @@
+2025-01-20T01:02:36.315Z - Starting appointment management journey capture...
+2025-01-20T01:02:37.368Z - Navigating to http://localhost:3000/dashboard
+2025-01-20T01:02:38.711Z - Browser console: warn: The Sentry loader you are trying to use isn't working anymore, check your configuration.
+2025-01-20T01:02:38.914Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T01:02:40.400Z - Browser console: verbose: [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o
+2025-01-20T01:02:42.479Z - Captured dashboard screenshot
+2025-01-20T01:03:07.973Z - Error during appointment management journey: Waiting for selector `h2` failed: Protocol error (Runtime.callFunctionOn): Target closed
+2025-01-20T01:04:13.162Z - Starting appointment management journey capture...
+2025-01-20T01:04:14.175Z - Navigating to http://localhost:3000/dashboard
+2025-01-20T01:04:15.127Z - Browser console: warn: The Sentry loader you are trying to use isn't working anymore, check your configuration.
+2025-01-20T01:04:15.330Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T01:04:15.834Z - Browser console: verbose: [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o
+2025-01-20T01:04:16.026Z - Captured dashboard screenshot
+2025-01-20T01:04:19.162Z - Error during appointment management journey: Waiting for selector `h2` failed: Protocol error (Runtime.callFunctionOn): Target closed
+2025-01-20T01:11:29.821Z - Starting appointment management journey capture...
+2025-01-20T01:11:29.989Z - Navigating to undefined/dashboard
+2025-01-20T01:11:29.990Z - Error during appointment management journey: Protocol error (Page.navigate): Cannot navigate to invalid URL
+2025-01-20T01:12:32.074Z - Starting appointment management journey capture...
+2025-01-20T01:12:32.241Z - Navigating to http://localhost:3000/dashboard
+2025-01-20T01:12:33.228Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T01:12:33.744Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T01:12:37.021Z - Captured dashboard screenshot

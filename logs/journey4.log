@@ -21,3 +21,13 @@
 [2025-01-19T23:46:46.215Z] Availability saved
 [2025-01-19T23:46:48.358Z] Availability setup journey captured successfully!
 [2025-01-19T23:46:48.358Z] Page will remain open. Press Enter to close the page...
+[2025-01-20T01:06:12.536Z] 
+=== Journey 4: Availability Setup Flow ===
+[2025-01-20T01:06:12.538Z] Capturing the journey of a provider setting up their availability
+[2025-01-20T01:06:12.538Z] Steps: Login → Availability → Set Hours → Configure Days → Save
+
+[2025-01-20T01:06:12.698Z] Navigating to dashboard...
+[2025-01-20T01:06:15.933Z] Going to availability page...
+[2025-01-20T01:06:18.848Z] Set Working Hours button not found
+[2025-01-20T01:06:18.848Z] Availability setup journey captured successfully!
+[2025-01-20T01:06:18.849Z] Page will remain open. Press Enter to close the page...

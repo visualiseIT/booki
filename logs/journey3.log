@@ -34,3 +34,20 @@
 [2025-01-19T23:46:11.043Z] Service saved
 [2025-01-19T23:46:13.173Z] Service setup journey captured successfully!
 [2025-01-19T23:46:13.173Z] Page will remain open. Press Enter to close the page...
+[2025-01-20T01:05:03.734Z] 
+=== Journey 3: Service Setup Flow ===
+[2025-01-20T01:05:03.736Z] Capturing the journey of a provider setting up their services
+[2025-01-20T01:05:03.736Z] Steps: Login → Services → Create Service → Configure → View
+
+[2025-01-20T01:05:03.901Z] Navigating to dashboard...
+[2025-01-20T01:05:06.774Z] Going to services page...
+[2025-01-20T01:05:09.660Z] Add Service button clicked
+[2025-01-20T01:05:10.793Z] Filling service form...
+[2025-01-20T01:05:10.859Z] Successfully filled #name
+[2025-01-20T01:05:10.907Z] Successfully filled #description
+[2025-01-20T01:05:10.917Z] Successfully filled #duration
+[2025-01-20T01:05:10.926Z] Successfully filled #price
+[2025-01-20T01:05:12.077Z] Saving service...
+[2025-01-20T01:05:12.082Z] Service saved
+[2025-01-20T01:05:14.210Z] Service setup journey captured successfully!
+[2025-01-20T01:05:14.210Z] Page will remain open. Press Enter to close the page...
