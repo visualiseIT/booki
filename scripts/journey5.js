@@ -10,196 +10,158 @@
  * 6. Complete booking
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 
-// Create logs directory if it doesn't exist
 const logsDir = path.join(__dirname, '../logs');
+const screenshotsDir = path.join(__dirname, '../screenshots/journey5');
+
+// Create directories if they don't exist
 if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir, { recursive: true });
+  fs.mkdirSync(logsDir);
+}
+if (!fs.existsSync(screenshotsDir)) {
+  fs.mkdirSync(screenshotsDir, { recursive: true });
 }
 
-// Create write stream for logging
-const logFile = path.join(logsDir, 'journey5.log');
-const logStream = fs.createWriteStream(logFile, { flags: 'a' });
+// Create a write stream for logging
+const logStream = fs.createWriteStream(path.join(logsDir, 'journey5.log'), { flags: 'a' });
 
-// Helper function to log both to console and file
 function log(message) {
   const timestamp = new Date().toISOString();
-  const logMessage = `[${timestamp}] ${message}\n`;
-  console.log(message);
+  const logMessage = `${timestamp} - ${message}\n`;
   logStream.write(logMessage);
+  console.log(message);
 }
 
-// Print description
-log('\n=== Journey 5: Customer Booking Flow ===');
-log('Capturing the journey of a customer booking a service');
-log('Steps: Visit → Browse Services → Select → Schedule → Book\n');
-
-async function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+async function safeType(page, selector, text) {
+  await page.waitForSelector(selector);
+  const element = await page.$(selector);
+  await element.click({ clickCount: 3 }); // Select all existing text
+  await element.press('Backspace'); // Clear the field
+  await page.keyboard.type(text); // Type new text
 }
 
 async function captureBookingJourney() {
-  const wsEndpointFile = '.browser-ws-endpoint';
+  log('Starting booking journey capture...');
   
-  if (!fs.existsSync(wsEndpointFile)) {
-    log('Browser is not running. Please start it first with: npm run browser');
-    process.exit(1);
-  }
-
-  const wsEndpoint = fs.readFileSync(wsEndpointFile, 'utf8');
-  const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
-  const page = await browser.newPage();
-  
-  // Set a large viewport size
-  await page.setViewport({
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 1,
+  const browser = await puppeteer.launch({
+    headless: false,
+    defaultViewport: null,
+    args: [
+      '--start-maximized',
+      '--window-size=1920,1080',
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
+    ]
   });
-  
-  const screenshotsDir = path.join(__dirname, '../screenshots/journey5');
-  
-  // Create screenshots directory if it doesn't exist
-  if (!fs.existsSync(screenshotsDir)) {
-    fs.mkdirSync(screenshotsDir, { recursive: true });
-  }
 
   try {
-    // 1. Visit provider's booking page
-    log('Visiting booking page...');
-    await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}/test-provider`, { waitUntil: 'networkidle0' });
-    await page.waitForSelector('h1');
-    await delay(1000);
+    const page = await browser.newPage();
     
-    await page.screenshot({
-      path: path.join(screenshotsDir, '1-booking-page.png'),
-      fullPage: true
+    // Listen for console messages
+    page.on('console', message => {
+      log(`Browser console: ${message.type()}: ${message.text()}`);
     });
 
-    // 2. View available services
-    log('Viewing services...');
-    const servicesSection = await page.evaluate(() => {
-      const heading = Array.from(document.querySelectorAll('h2')).find(
-        h2 => h2.textContent?.includes('Available Services')
-      );
-      return !!heading;
+    // Listen for page errors
+    page.on('pageerror', error => {
+      log(`Browser error: ${error.toString()}`);
     });
 
-    if (servicesSection) {
-      log('Services section found');
-      await delay(1000);
-      
-      await page.screenshot({
-        path: path.join(screenshotsDir, '2-services-list.png'),
-        fullPage: true
-      });
+    await page.setViewport({ width: 1920, height: 1080 });
 
-      // 3. Select a service
-      log('Selecting a service...');
-      const bookButton = await page.evaluate(() => {
-        const button = Array.from(document.querySelectorAll('button')).find(
-          button => button.textContent?.includes('Book')
-        );
-        if (button) button.click();
-        return !!button;
-      });
+    // Visit the provider's booking page
+    const bookingUrl = 'http://localhost:3000/john-doe';
+    log(`Navigating to ${bookingUrl}`);
+    await page.goto(bookingUrl);
+    await page.waitForSelector('h1');
+    await page.screenshot({ path: path.join(screenshotsDir, '1-booking-page.png'), fullPage: true });
+    log('Captured booking page screenshot');
 
-      if (bookButton) {
-        log('Service selected');
-        await delay(1000);
-        
-        await page.screenshot({
-          path: path.join(screenshotsDir, '3-service-selected.png'),
-          fullPage: true
-        });
+    // Wait for services to load
+    await page.waitForSelector('.divide-y');
+    await page.screenshot({ path: path.join(screenshotsDir, '2-services-list.png'), fullPage: true });
+    log('Captured services list screenshot');
 
-        // 4. Choose date and time
-        log('Selecting date and time...');
-        
-        // Helper function to safely type into an input
-        async function safeType(selector, value) {
-          try {
-            await page.waitForSelector(selector, { timeout: 5000 });
-            await page.type(selector, value);
-            log(`Successfully filled ${selector}`);
-          } catch (error) {
-            log(`Failed to fill ${selector}: ${error.message}`);
-          }
-        }
+    // Click the Book button for the first service
+    const bookButton = await page.waitForSelector('button:not([disabled])');
+    await bookButton.click();
+    
+    // Wait for dialog to open and form to be ready
+    await page.waitForSelector('form');
+    await page.screenshot({ path: path.join(screenshotsDir, '3-booking-form.png'), fullPage: true });
+    log('Captured booking form screenshot');
 
-        // Select next available slot
-        const dateInput = await page.$('input[type="date"]');
-        if (dateInput) {
-          const tomorrow = new Date();
-          tomorrow.setDate(tomorrow.getDate() + 1);
-          const dateString = tomorrow.toISOString().split('T')[0];
-          await dateInput.type(dateString);
-          log('Date selected');
-        }
+    // Use keyboard to fill the form
+    log('Filling form using keyboard...');
+    
+    // Name field (first field in focus)
+    await page.keyboard.type('Test Customer');
+    await page.keyboard.press('Tab');
+    
+    // Email field
+    await page.keyboard.type('test@example.com');
+    await page.keyboard.press('Tab');
+    
+    // Date field
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dateString = tomorrow.toISOString().split('T')[0];
+    log(`Setting date to: ${dateString}`);
+    await page.keyboard.type(dateString);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');  // Extra Tab for datepicker button
+    
+    // Time field
+    await page.keyboard.type('10:00');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');  // Extra Tab for timepicker button
+    
+    // Notes field
+    await page.keyboard.type('Test booking notes');
+    
+    await page.screenshot({ path: path.join(screenshotsDir, '4-filled-form.png'), fullPage: true });
+    log('Captured filled form screenshot');
 
-        await delay(1000);
-        await page.screenshot({
-          path: path.join(screenshotsDir, '4-datetime-selected.png'),
-          fullPage: true
-        });
+    // Submit form (Tab to submit button and press Enter)
+    log('Submitting form...');
+    await page.keyboard.press('Tab');  // Tab to submit button
+    await page.keyboard.press('Enter');
+    log('Pressed Enter to submit');
+    
+    // Wait for dialog to close
+    log('Waiting for dialog to close...');
+    await page.waitForFunction(() => !document.querySelector('form'), { timeout: 5000 })
+      .catch(() => log('Dialog did not close automatically'));
+    
+    // Take final screenshot
+    await page.screenshot({ path: path.join(screenshotsDir, '5-booking-confirmation.png'), fullPage: true });
+    log('Captured booking confirmation screenshot');
 
-        // 5. Fill customer details
-        log('Filling customer details...');
-        await safeType('#name', 'Test Customer');
-        await safeType('#email', 'test@example.com');
-        await safeType('#notes', 'This is a test booking from journey5');
-        
-        await delay(1000);
-        await page.screenshot({
-          path: path.join(screenshotsDir, '5-details-filled.png'),
-          fullPage: true
-        });
-
-        // 6. Complete booking
-        log('Completing booking...');
-        const confirmButton = await page.evaluate(() => {
-          const button = Array.from(document.querySelectorAll('button')).find(
-            button => button.textContent?.includes('Confirm Booking')
-          );
-          if (button) button.click();
-          return !!button;
-        });
-
-        if (confirmButton) {
-          log('Booking confirmed');
-          await delay(2000);
-          
-          await page.screenshot({
-            path: path.join(screenshotsDir, '6-booking-confirmed.png'),
-            fullPage: true
-          });
-        } else {
-          log('Confirm button not found');
-        }
-      } else {
-        log('Book button not found');
-      }
+    // Check for success
+    const success = await page.evaluate(() => {
+      const toasts = Array.from(document.querySelectorAll('[role="status"]'));
+      return toasts.some(toast => toast.textContent.includes('Appointment created'));
+    });
+    
+    if (success) {
+      log('Appointment was created successfully');
     } else {
-      log('Services section not found');
+      log('No confirmation toast found');
     }
 
-    log('Booking journey captured successfully!');
-    log('Page will remain open. Press Enter to close the page...');
-    
-    // Wait for user input before closing
-    await new Promise(resolve => process.stdin.once('data', resolve));
+    log('Booking journey completed successfully');
   } catch (error) {
-    log('Error during booking journey:');
-    log(error.toString());
+    log(`Error during booking journey: ${error.message}`);
+    throw error;
   } finally {
-    await page.close();
-    await browser.disconnect();
+    await browser.close();
     logStream.end();
   }
 }
 
-captureBookingJourney(); 
+// Run the journey
+captureBookingJourney().catch(console.error); 

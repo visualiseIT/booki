@@ -13,11 +13,51 @@ export const createAppointment = mutation({
     notes: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    // TODO: Add validation for time slot availability
-    return await ctx.db.insert("appointments", {
-      ...args,
-      status: "pending",
-    });
+    try {
+      // Validate provider exists
+      const provider = await ctx.db.get(args.providerId);
+      if (!provider) {
+        throw new Error("Provider not found");
+      }
+
+      // Validate service exists and belongs to provider
+      const service = await ctx.db.get(args.serviceId);
+      if (!service) {
+        throw new Error("Service not found");
+      }
+      if (service.providerId !== args.providerId) {
+        throw new Error("Service does not belong to provider");
+      }
+
+      // Validate appointment times
+      const startTime = new Date(args.startTime);
+      const endTime = new Date(args.endTime);
+      
+      if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+        throw new Error("Invalid appointment times");
+      }
+      
+      if (startTime >= endTime) {
+        throw new Error("End time must be after start time");
+      }
+
+      // Create the appointment
+      const appointment = await ctx.db.insert("appointments", {
+        providerId: args.providerId,
+        serviceId: args.serviceId,
+        customerName: args.customerName,
+        customerEmail: args.customerEmail,
+        startTime: args.startTime,
+        endTime: args.endTime,
+        notes: args.notes,
+        status: "confirmed",
+      });
+
+      return appointment;
+    } catch (error) {
+      console.error('Error in createAppointment:', error);
+      throw error;
+    }
   },
 });
 

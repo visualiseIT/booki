@@ -8,3 +8,380 @@
 [2025-01-19T23:53:08.562Z] Services section not found
 [2025-01-19T23:53:08.562Z] Booking journey captured successfully!
 [2025-01-19T23:53:08.562Z] Page will remain open. Press Enter to close the page...
+[2025-01-19T23:58:32.381Z] 
+=== Journey 5: Customer Booking Flow ===
+[2025-01-19T23:58:32.382Z] Capturing the journey of a customer booking a service
+[2025-01-19T23:58:32.382Z] Steps: Visit → Browse Services → Select → Schedule → Book
+
+[2025-01-19T23:58:32.591Z] Visiting booking page...
+[2025-01-19T23:58:35.506Z] Viewing services...
+[2025-01-19T23:58:35.507Z] Services section found
+[2025-01-19T23:58:36.634Z] Selecting a service...
+[2025-01-19T23:58:36.635Z] Book button not found
+[2025-01-19T23:58:36.635Z] Booking journey captured successfully!
+[2025-01-19T23:58:36.635Z] Page will remain open. Press Enter to close the page...
+2025-01-20T00:01:32.720Z - Starting booking journey capture...
+2025-01-20T00:01:35.347Z - Navigating to undefined/john-doe
+2025-01-20T00:01:35.349Z - Error during booking journey: Protocol error (Page.navigate): Cannot navigate to invalid URL
+2025-01-20T00:02:00.497Z - Starting booking journey capture...
+2025-01-20T00:02:01.944Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:02:03.808Z - Captured booking page screenshot
+2025-01-20T00:02:33.811Z - Error during booking journey: Waiting for selector `h2:contains("Available Services")` failed: Waiting failed: 30000ms exceeded
+2025-01-20T00:03:04.217Z - Starting booking journey capture...
+2025-01-20T00:03:05.386Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:03:07.009Z - Captured booking page screenshot
+2025-01-20T00:03:07.116Z - Captured services list screenshot
+2025-01-20T00:03:07.953Z - Captured booking form screenshot
+2025-01-20T00:03:09.153Z - Captured filled form screenshot
+2025-01-20T00:03:39.185Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 30000ms exceeded
+2025-01-20T00:05:39.376Z - Starting booking journey capture...
+2025-01-20T00:05:40.493Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:05:42.371Z - Captured booking page screenshot
+2025-01-20T00:05:42.478Z - Captured services list screenshot
+2025-01-20T00:05:43.077Z - Captured booking form screenshot
+2025-01-20T00:05:43.349Z - Captured filled form screenshot
+2025-01-20T00:05:48.379Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:10:22.431Z - Starting booking journey capture...
+2025-01-20T00:10:23.655Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:10:26.731Z - Captured booking page screenshot
+2025-01-20T00:10:27.025Z - Captured services list screenshot
+2025-01-20T00:10:27.326Z - Captured booking form screenshot
+2025-01-20T00:10:27.625Z - Captured filled form screenshot
+2025-01-20T00:10:32.656Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:10:53.228Z - Starting booking journey capture...
+2025-01-20T00:10:54.531Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:10:56.145Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:10:56.368Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:10:57.358Z - Captured booking page screenshot
+2025-01-20T00:10:57.500Z - Captured services list screenshot
+2025-01-20T00:10:57.555Z - Browser console: warn: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-20T00:10:57.557Z - Browser console: warn: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-20T00:10:57.560Z - Browser console: warn: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-20T00:10:57.562Z - Browser console: warn: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-20T00:10:57.746Z - Captured booking form screenshot
+2025-01-20T00:10:58.035Z - Captured filled form screenshot
+2025-01-20T00:11:03.064Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:18:40.000Z - Starting booking journey capture...
+2025-01-20T00:18:41.055Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:18:42.001Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:18:42.224Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:18:42.744Z - Captured booking page screenshot
+2025-01-20T00:18:42.866Z - Captured services list screenshot
+2025-01-20T00:18:43.403Z - Captured booking form screenshot
+2025-01-20T00:18:43.922Z - Captured filled form screenshot
+2025-01-20T00:18:48.951Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:20:20.239Z - Starting booking journey capture...
+2025-01-20T00:20:21.448Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:20:22.442Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:20:23.326Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:20:23.973Z - Captured booking page screenshot
+2025-01-20T00:20:24.116Z - Captured services list screenshot
+2025-01-20T00:20:24.380Z - Captured booking form screenshot
+2025-01-20T00:20:24.473Z - Setting date to: 2025-01-21
+2025-01-20T00:20:25.015Z - Setting time to: 10:00
+2025-01-20T00:20:25.540Z - Date field value: 
+2025-01-20T00:20:25.541Z - Time field value: 
+2025-01-20T00:20:25.720Z - Captured filled form screenshot
+2025-01-20T00:20:25.740Z - Browser console: error: Error creating appointment: JSHandle@error
+2025-01-20T00:20:26.920Z - Captured booking confirmation screenshot
+2025-01-20T00:20:26.920Z - Booking journey completed successfully
+2025-01-20T00:23:00.906Z - Starting booking journey capture...
+2025-01-20T00:23:02.171Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:23:02.796Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:23:03.025Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:23:03.552Z - Captured booking page screenshot
+2025-01-20T00:23:03.694Z - Captured services list screenshot
+2025-01-20T00:23:03.908Z - Captured booking form screenshot
+2025-01-20T00:23:04.000Z - Setting date to: 2025-01-21
+2025-01-20T00:23:04.529Z - Setting time to: 10:00
+2025-01-20T00:23:05.051Z - Date field value: 
+2025-01-20T00:23:05.051Z - Time field value: 
+2025-01-20T00:23:05.233Z - Captured filled form screenshot
+2025-01-20T00:23:05.253Z - Browser console: error: Error creating appointment: JSHandle@error
+2025-01-20T00:23:06.415Z - Captured booking confirmation screenshot
+2025-01-20T00:23:06.415Z - Booking journey completed successfully
+2025-01-20T00:23:38.175Z - Starting booking journey capture...
+2025-01-20T00:23:39.271Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:23:39.919Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:23:40.142Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:23:40.664Z - Captured booking page screenshot
+2025-01-20T00:23:40.789Z - Captured services list screenshot
+2025-01-20T00:23:41.003Z - Captured booking form screenshot
+2025-01-20T00:23:41.093Z - Setting date to: 2025-01-21
+2025-01-20T00:23:41.094Z - Setting time to: 10:00
+2025-01-20T00:23:41.098Z - Date field value: 2025-01-21
+2025-01-20T00:23:41.098Z - Time field value: 10:00
+2025-01-20T00:23:41.307Z - Captured filled form screenshot
+2025-01-20T00:23:46.337Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:24:12.325Z - Starting booking journey capture...
+2025-01-20T00:24:13.499Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:24:14.221Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:24:14.441Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:24:15.107Z - Captured booking page screenshot
+2025-01-20T00:24:15.230Z - Captured services list screenshot
+2025-01-20T00:24:15.449Z - Captured booking form screenshot
+2025-01-20T00:24:15.539Z - Setting date to: 2025-01-21
+2025-01-20T00:24:15.540Z - Setting time to: 10:00
+2025-01-20T00:24:15.544Z - Date field value: 2025-01-21
+2025-01-20T00:24:15.544Z - Time field value: 10:00
+2025-01-20T00:24:15.751Z - Captured filled form screenshot
+2025-01-20T00:24:21.784Z - Error during booking journey: Waiting for selector `[role="status"]` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:26:07.888Z - Starting booking journey capture...
+2025-01-20T00:26:09.086Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:26:09.978Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:26:10.239Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:26:10.902Z - Captured booking page screenshot
+2025-01-20T00:26:11.023Z - Captured services list screenshot
+2025-01-20T00:26:11.259Z - Captured booking form screenshot
+2025-01-20T00:26:11.346Z - Setting date to: 2025-01-21
+2025-01-20T00:26:11.347Z - Setting time to: 10:00
+2025-01-20T00:26:11.351Z - Date field value: 2025-01-21
+2025-01-20T00:26:11.351Z - Time field value: 10:00
+2025-01-20T00:26:11.561Z - Captured filled form screenshot
+2025-01-20T00:26:12.591Z - Waiting for success toast...
+2025-01-20T00:26:17.593Z - Error during booking journey: Waiting for selector `.booking-success-toast` failed: Waiting failed: 5000ms exceeded
+2025-01-20T00:27:34.591Z - Starting booking journey capture...
+2025-01-20T00:27:35.775Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:27:36.674Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:27:37.023Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:27:37.691Z - Captured booking page screenshot
+2025-01-20T00:27:38.033Z - Captured services list screenshot
+2025-01-20T00:27:38.328Z - Captured booking form screenshot
+2025-01-20T00:27:38.423Z - Setting date to: 2025-01-21
+2025-01-20T00:27:38.424Z - Setting time to: 10:00
+2025-01-20T00:27:38.429Z - Date field value: 2025-01-21
+2025-01-20T00:27:38.429Z - Time field value: 10:00
+2025-01-20T00:27:38.617Z - Captured filled form screenshot
+2025-01-20T00:27:40.954Z - No clear success or error message found in logs
+2025-01-20T00:27:40.954Z - Booking journey completed successfully
+2025-01-20T00:30:46.570Z - Starting booking journey capture...
+2025-01-20T00:30:47.702Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:30:48.761Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:30:48.983Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:30:49.810Z - Captured booking page screenshot
+2025-01-20T00:30:49.917Z - Captured services list screenshot
+2025-01-20T00:30:50.133Z - Captured booking form screenshot
+2025-01-20T00:30:50.223Z - Setting date to: 2025-01-21
+2025-01-20T00:30:50.224Z - Setting time to: 10:00
+2025-01-20T00:30:50.227Z - Date field value: 2025-01-21
+2025-01-20T00:30:50.228Z - Time field value: 10:00
+2025-01-20T00:30:50.404Z - Captured filled form screenshot
+2025-01-20T00:30:53.591Z - Captured booking confirmation screenshot
+2025-01-20T00:30:53.592Z - Booking journey completed successfully
+2025-01-20T00:33:15.520Z - Starting booking journey capture...
+2025-01-20T00:33:16.721Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:33:17.445Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:33:17.669Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:33:18.268Z - Captured booking page screenshot
+2025-01-20T00:33:18.392Z - Captured services list screenshot
+2025-01-20T00:33:18.672Z - Captured booking form screenshot
+2025-01-20T00:33:18.750Z - Setting date to: 2025-01-21
+2025-01-20T00:33:18.751Z - Setting time to: 10:00
+2025-01-20T00:33:18.756Z - Date field value: 2025-01-21
+2025-01-20T00:33:18.756Z - Time field value: 10:00
+2025-01-20T00:33:18.928Z - Captured filled form screenshot
+2025-01-20T00:33:22.082Z - Captured booking confirmation screenshot
+2025-01-20T00:33:22.083Z - Booking journey completed successfully
+2025-01-20T00:35:54.195Z - Starting booking journey capture...
+2025-01-20T00:35:55.400Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:35:56.181Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:35:56.404Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:35:57.027Z - Captured booking page screenshot
+2025-01-20T00:35:57.204Z - Captured services list screenshot
+2025-01-20T00:35:57.449Z - Captured booking form screenshot
+2025-01-20T00:35:57.528Z - Setting date to: 2025-01-21
+2025-01-20T00:35:57.529Z - Setting time to: 10:00
+2025-01-20T00:35:57.534Z - Date field value: 2025-01-21
+2025-01-20T00:35:57.534Z - Time field value: 10:00
+2025-01-20T00:35:57.725Z - Captured filled form screenshot
+2025-01-20T00:36:00.894Z - Captured booking confirmation screenshot
+2025-01-20T00:36:00.895Z - Booking journey completed successfully
+2025-01-20T00:36:32.587Z - Starting booking journey capture...
+2025-01-20T00:36:33.666Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:36:34.675Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:36:34.811Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:36:35.856Z - Captured booking page screenshot
+2025-01-20T00:36:35.978Z - Captured services list screenshot
+2025-01-20T00:36:36.246Z - Captured booking form screenshot
+2025-01-20T00:36:36.335Z - Setting date to: 2025-01-21
+2025-01-20T00:36:36.336Z - Setting time to: 10:00
+2025-01-20T00:36:36.340Z - Date field value: 2025-01-21
+2025-01-20T00:36:36.340Z - Time field value: 10:00
+2025-01-20T00:36:36.515Z - Captured filled form screenshot
+2025-01-20T00:36:38.543Z - No appointment creation attempt found in logs
+2025-01-20T00:36:39.685Z - Captured booking confirmation screenshot
+2025-01-20T00:36:39.685Z - Booking journey completed successfully
+2025-01-20T00:37:59.144Z - Starting booking journey capture...
+2025-01-20T00:38:00.377Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:38:01.048Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:38:01.327Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:38:01.829Z - Captured booking page screenshot
+2025-01-20T00:38:01.953Z - Captured services list screenshot
+2025-01-20T00:38:02.234Z - Captured booking form screenshot
+2025-01-20T00:38:02.326Z - Setting date to: 2025-01-21
+2025-01-20T00:38:02.327Z - Setting time to: 10:00
+2025-01-20T00:38:02.331Z - Date field value: 2025-01-21
+2025-01-20T00:38:02.331Z - Time field value: 10:00
+2025-01-20T00:38:02.507Z - Captured filled form screenshot
+2025-01-20T00:38:02.508Z - Submitting form...
+2025-01-20T00:38:02.518Z - Form submitted
+2025-01-20T00:38:04.521Z - No appointment creation attempt found in logs
+2025-01-20T00:38:04.521Z - Trying alternative form submission...
+2025-01-20T00:38:07.679Z - Captured booking confirmation screenshot
+2025-01-20T00:38:07.679Z - Booking journey completed successfully
+2025-01-20T00:39:29.039Z - Starting booking journey capture...
+2025-01-20T00:39:30.145Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:39:31.011Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:39:31.503Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:39:32.489Z - Captured booking page screenshot
+2025-01-20T00:39:32.611Z - Captured services list screenshot
+2025-01-20T00:39:32.828Z - Captured booking form screenshot
+2025-01-20T00:39:32.899Z - Setting date to: 2025-01-21
+2025-01-20T00:39:32.901Z - Setting time to: 10:00
+2025-01-20T00:39:32.905Z - Date field value: 2025-01-21
+2025-01-20T00:39:32.905Z - Time field value: 10:00
+2025-01-20T00:39:33.082Z - Captured filled form screenshot
+2025-01-20T00:39:33.082Z - Submitting form...
+2025-01-20T00:39:33.088Z - Form submitted
+2025-01-20T00:39:35.090Z - No appointment creation attempt found in logs
+2025-01-20T00:39:35.090Z - Trying alternative form submission...
+2025-01-20T00:39:38.286Z - Captured booking confirmation screenshot
+2025-01-20T00:39:38.286Z - Booking journey completed successfully
+2025-01-20T00:41:50.305Z - Starting booking journey capture...
+2025-01-20T00:41:51.552Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:41:52.611Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:41:52.834Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:41:53.759Z - Captured booking page screenshot
+2025-01-20T00:41:53.884Z - Captured services list screenshot
+2025-01-20T00:41:54.100Z - Captured booking form screenshot
+2025-01-20T00:41:54.180Z - Setting date to: 2025-01-21
+2025-01-20T00:41:54.181Z - Setting time to: 10:00
+2025-01-20T00:41:54.185Z - Date field value: 2025-01-21
+2025-01-20T00:41:54.185Z - Time field value: 10:00
+2025-01-20T00:41:54.370Z - Captured filled form screenshot
+2025-01-20T00:41:54.370Z - Clicking Confirm Booking button...
+2025-01-20T00:41:54.380Z - Clicked Confirm Booking button
+2025-01-20T00:41:54.380Z - Waiting for modal to close...
+2025-01-20T00:41:56.382Z - Modal still visible, trying alternative click method...
+2025-01-20T00:41:58.536Z - Captured booking confirmation screenshot
+2025-01-20T00:41:58.537Z - No confirmation of appointment creation found in logs
+2025-01-20T00:41:58.537Z - Booking journey completed successfully
+2025-01-20T00:42:29.237Z - Starting booking journey capture...
+2025-01-20T00:42:30.450Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:42:31.237Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:42:31.789Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:42:32.835Z - Captured booking page screenshot
+2025-01-20T00:42:33.062Z - Captured services list screenshot
+2025-01-20T00:42:33.324Z - Captured booking form screenshot
+2025-01-20T00:42:33.417Z - Setting date to: 2025-01-21
+2025-01-20T00:42:33.418Z - Setting time to: 10:00
+2025-01-20T00:42:33.421Z - Date field value: 2025-01-21
+2025-01-20T00:42:33.421Z - Time field value: 10:00
+2025-01-20T00:42:33.598Z - Captured filled form screenshot
+2025-01-20T00:42:33.598Z - Submitting form with keyboard...
+2025-01-20T00:42:33.613Z - Pressed Enter on submit button
+2025-01-20T00:42:33.613Z - Waiting for submission to complete...
+2025-01-20T00:42:36.616Z - Modal still visible, trying mouse click...
+2025-01-20T00:42:38.770Z - Captured booking confirmation screenshot
+2025-01-20T00:42:38.771Z - No confirmation of appointment creation found in logs
+2025-01-20T00:42:38.771Z - Booking journey completed successfully
+2025-01-20T00:43:31.173Z - Starting booking journey capture...
+2025-01-20T00:43:32.454Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:43:33.570Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:43:33.792Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:43:34.704Z - Captured booking page screenshot
+2025-01-20T00:43:34.911Z - Captured services list screenshot
+2025-01-20T00:43:35.174Z - Captured booking form screenshot
+2025-01-20T00:43:35.253Z - Setting date to: 2025-01-21
+2025-01-20T00:43:35.254Z - Setting time to: 10:00
+2025-01-20T00:43:35.259Z - Date field value: 2025-01-21
+2025-01-20T00:43:35.259Z - Time field value: 10:00
+2025-01-20T00:43:35.430Z - Captured filled form screenshot
+2025-01-20T00:43:35.430Z - Submitting form...
+2025-01-20T00:43:35.453Z - Clicked submit button
+2025-01-20T00:43:35.453Z - Waiting for submission to complete...
+2025-01-20T00:43:38.454Z - Modal still visible, trying form submit...
+2025-01-20T00:43:40.678Z - Captured booking confirmation screenshot
+2025-01-20T00:43:40.679Z - No confirmation of appointment creation found in logs
+2025-01-20T00:43:40.680Z - Booking journey completed successfully
+2025-01-20T00:45:09.624Z - Starting booking journey capture...
+2025-01-20T00:45:10.832Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:45:11.569Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:45:11.715Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:45:12.412Z - Captured booking page screenshot
+2025-01-20T00:45:12.535Z - Captured services list screenshot
+2025-01-20T00:45:12.752Z - Captured booking form screenshot
+2025-01-20T00:45:12.843Z - Setting date to: 2025-01-21
+2025-01-20T00:45:12.847Z - Date field value: 2025-01-21
+2025-01-20T00:45:12.847Z - Time field value: 10:00
+2025-01-20T00:45:13.043Z - Captured filled form screenshot
+2025-01-20T00:45:13.043Z - Submitting form...
+2025-01-20T00:45:13.063Z - Clicked submit button
+2025-01-20T00:45:13.063Z - Waiting for submission to complete...
+2025-01-20T00:45:16.065Z - Modal still visible, trying native form submit...
+2025-01-20T00:45:18.247Z - Captured booking confirmation screenshot
+2025-01-20T00:45:18.248Z - No confirmation of appointment creation found in logs
+2025-01-20T00:45:18.248Z - Booking journey completed successfully
+2025-01-20T00:47:11.786Z - Starting booking journey capture...
+2025-01-20T00:47:13.054Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:47:13.729Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:47:13.864Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:47:14.548Z - Captured booking page screenshot
+2025-01-20T00:47:14.670Z - Captured services list screenshot
+2025-01-20T00:49:14.890Z - Starting booking journey capture...
+2025-01-20T00:49:16.003Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:49:16.681Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:49:16.906Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:49:17.464Z - Captured booking page screenshot
+2025-01-20T00:49:17.588Z - Captured services list screenshot
+2025-01-20T00:49:47.633Z - Error during booking journey: Waiting for selector `[role="dialog"][aria-modal="true"]` failed: Waiting failed: 30000ms exceeded
+2025-01-20T00:50:31.261Z - Starting booking journey capture...
+2025-01-20T00:50:32.480Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:50:33.207Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:50:33.825Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:50:34.518Z - Captured booking page screenshot
+2025-01-20T00:50:34.861Z - Captured services list screenshot
+2025-01-20T00:50:35.056Z - Captured booking form screenshot
+2025-01-20T00:50:35.056Z - Filling form using keyboard...
+2025-01-20T00:50:35.103Z - Setting date to: 2025-01-21
+2025-01-20T00:50:35.311Z - Captured filled form screenshot
+2025-01-20T00:50:35.311Z - Submitting form...
+2025-01-20T00:50:35.323Z - Pressed Enter to submit
+2025-01-20T00:50:35.323Z - Waiting for dialog to close...
+2025-01-20T00:50:40.325Z - Dialog did not close automatically
+2025-01-20T00:50:40.466Z - Captured booking confirmation screenshot
+2025-01-20T00:50:40.466Z - No confirmation toast found
+2025-01-20T00:50:40.466Z - Booking journey completed successfully
+2025-01-20T00:52:40.517Z - Starting booking journey capture...
+2025-01-20T00:52:41.604Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:52:42.377Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:52:42.510Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:52:43.186Z - Captured booking page screenshot
+2025-01-20T00:52:43.309Z - Captured services list screenshot
+2025-01-20T00:52:43.610Z - Captured booking form screenshot
+2025-01-20T00:52:43.611Z - Filling form using keyboard...
+2025-01-20T00:52:43.664Z - Setting date to: 2025-01-21
+2025-01-20T00:52:43.848Z - Captured filled form screenshot
+2025-01-20T00:52:43.848Z - Submitting form...
+2025-01-20T00:52:43.852Z - Pressed Enter to submit
+2025-01-20T00:52:43.852Z - Waiting for dialog to close...
+2025-01-20T00:52:48.853Z - Dialog did not close automatically
+2025-01-20T00:52:48.971Z - Captured booking confirmation screenshot
+2025-01-20T00:52:48.971Z - No confirmation toast found
+2025-01-20T00:52:48.971Z - Booking journey completed successfully
+2025-01-20T00:54:00.012Z - Starting booking journey capture...
+2025-01-20T00:54:01.226Z - Navigating to http://localhost:3000/john-doe
+2025-01-20T00:54:02.040Z - Browser console: info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-20T00:54:02.258Z - Browser console: warn: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-20T00:54:02.940Z - Captured booking page screenshot
+2025-01-20T00:54:03.232Z - Captured services list screenshot
+2025-01-20T00:54:03.463Z - Captured booking form screenshot
+2025-01-20T00:54:03.463Z - Filling form using keyboard...
+2025-01-20T00:54:03.517Z - Setting date to: 2025-01-21
+2025-01-20T00:54:03.686Z - Captured filled form screenshot
+2025-01-20T00:54:03.686Z - Submitting form...
+2025-01-20T00:54:03.697Z - Pressed Enter to submit
+2025-01-20T00:54:03.697Z - Waiting for dialog to close...
+2025-01-20T00:54:03.983Z - Captured booking confirmation screenshot
+2025-01-20T00:54:03.984Z - No confirmation toast found
+2025-01-20T00:54:03.984Z - Booking journey completed successfully
