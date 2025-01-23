@@ -15,6 +15,7 @@ import type {
 } from "convex/server";
 import type * as appointments from "../appointments.js";
 import type * as businessHours from "../businessHours.js";
+import type * as formFields from "../formFields.js";
 import type * as providers from "../providers.js";
 import type * as services from "../services.js";
 
@@ -29,6 +30,7 @@ import type * as services from "../services.js";
 declare const fullApi: ApiFromModules<{
   appointments: typeof appointments;
   businessHours: typeof businessHours;
+  formFields: typeof formFields;
   providers: typeof providers;
   services: typeof services;
 }>;

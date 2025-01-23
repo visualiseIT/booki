@@ -3,62 +3,72 @@ import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
 import { getUser } from "./providers";
 
-export const createAppointment = mutation({
+export const create = mutation({
   args: {
     providerId: v.id("providers"),
     serviceId: v.id("services"),
     customerName: v.string(),
     customerEmail: v.string(),
-    startTime: v.string(),
-    endTime: v.string(),
+    customerPhone: v.string(),
+    date: v.string(),
+    time: v.string(),
     notes: v.optional(v.string()),
+    customFields: v.array(
+      v.object({
+        fieldId: v.id("formFields"),
+        value: v.string(),
+      })
+    ),
   },
   handler: async (ctx, args) => {
-    try {
-      // Validate provider exists
-      const provider = await ctx.db.get(args.providerId);
-      if (!provider) {
-        throw new Error("Provider not found");
-      }
+    // Verify the provider exists
+    const provider = await ctx.db.get(args.providerId);
+    if (!provider) throw new Error("Provider not found");
 
-      // Validate service exists and belongs to provider
-      const service = await ctx.db.get(args.serviceId);
-      if (!service) {
-        throw new Error("Service not found");
-      }
-      if (service.providerId !== args.providerId) {
-        throw new Error("Service does not belong to provider");
-      }
-
-      // Validate appointment times
-      const startTime = new Date(args.startTime);
-      const endTime = new Date(args.endTime);
-      
-      if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
-        throw new Error("Invalid appointment times");
-      }
-      
-      if (startTime >= endTime) {
-        throw new Error("End time must be after start time");
-      }
-
-      // Create the appointment
-      const appointment = await ctx.db.insert("appointments", {
-        providerId: args.providerId,
-        serviceId: args.serviceId,
-        customerName: args.customerName,
-        customerEmail: args.customerEmail,
-        startTime: args.startTime,
-        endTime: args.endTime,
-        notes: args.notes,
-        status: "confirmed",
-      });
-
-      return appointment;
-    } catch (error) {
-      console.error('Error in createAppointment:', error);
-      throw error;
+    // Verify the service exists and belongs to the provider
+    const service = await ctx.db.get(args.serviceId);
+    if (!service || service.providerId !== args.providerId) {
+      throw new Error("Service not found");
     }
+
+    // Verify all required custom fields are provided
+    const requiredFields = await ctx.db
+      .query("formFields")
+      .withIndex("by_providerId", q => q.eq("providerId", args.providerId))
+      .filter(q => 
+        q.and(
+          q.eq(q.field("isActive"), true),
+          q.eq(q.field("required"), true),
+          q.or(
+            q.eq(q.field("serviceId"), null),
+            q.eq(q.field("serviceId"), args.serviceId)
+          )
+        )
+      )
+      .collect();
+
+    const providedFieldIds = new Set(args.customFields.map(f => f.fieldId));
+    for (const field of requiredFields) {
+      if (!providedFieldIds.has(field._id)) {
+        throw new Error(`Required field "${field.label}" is missing`);
+      }
+    }
+
+    // Create the appointment
+    const appointmentId = await ctx.db.insert("appointments", {
+      providerId: args.providerId,
+      serviceId: args.serviceId,
+      customerName: args.customerName,
+      customerEmail: args.customerEmail,
+      customerPhone: args.customerPhone,
+      date: args.date,
+      time: args.time,
+      notes: args.notes,
+      status: "confirmed",
+      customFields: args.customFields,
+    });
+
+    return appointmentId;
   },
 });
 
