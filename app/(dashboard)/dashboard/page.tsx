@@ -84,6 +84,11 @@ export default function DashboardPage() {
                 Set Availability
               </Link>
             </Button>
+            <Button asChild className="w-full justify-start">
+              <Link href="/dashboard/form-fields">
+                Customize Form Fields
+              </Link>
+            </Button>
           </div>
         </Card>
 

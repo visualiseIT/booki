@@ -10,11 +10,14 @@ import { ArrowLeft } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { AddFieldDialog } from "./components/AddFieldDialog";
+import { EditFieldDialog } from "./components/EditFieldDialog";
 
 export default function FormFieldsPage() {
   const router = useRouter();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedField, setSelectedField] = useState<any | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const provider = useQuery(api.providers.getProvider);
   const services = useQuery(api.services.getServices, 
@@ -43,6 +46,11 @@ export default function FormFieldsPage() {
   const filteredFields = selectedService
     ? formFields?.filter(field => !field.serviceId || field.serviceId === selectedService)
     : formFields;
+
+  const handleEdit = (field: any) => {
+    setSelectedField(field);
+    setIsEditDialogOpen(true);
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -109,6 +117,13 @@ export default function FormFieldsPage() {
                 <Button
                   variant="outline"
                   size="sm"
+                  onClick={() => handleEdit(field)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={() => toggleFieldStatus({ id: field._id })}
                 >
                   {field.isActive ? "Disable" : "Enable"}
@@ -131,6 +146,13 @@ export default function FormFieldsPage() {
         open={isAddDialogOpen}
         onOpenChange={setIsAddDialogOpen}
         services={services || []}
+      />
+
+      <EditFieldDialog
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
+        services={services || []}
+        field={selectedField}
       />
     </div>
   );

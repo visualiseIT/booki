@@ -1,0 +1,77 @@
+2025-01-23T23:32:22.971Z - Starting Form Fields Setup Journey
+2025-01-23T23:32:23.119Z - Navigating to Form Fields page
+2025-01-23T23:32:23.121Z - Error in Form Fields Setup Journey: Protocol error (Page.navigate): Cannot navigate to invalid URL
+2025-01-23T23:32:23.130Z - Failed to connect to browser: Protocol error (Page.navigate): Cannot navigate to invalid URL
+2025-01-23T23:36:38.383Z - Starting Form Fields Setup Journey
+2025-01-23T23:36:38.385Z - Using base URL: http://localhost:3000
+2025-01-23T23:36:38.533Z - Navigating to Form Fields page
+2025-01-23T23:37:11.592Z - Error in Form Fields Setup Journey: Waiting for selector `h1` failed: Waiting failed: 30000ms exceeded
+2025-01-23T23:37:11.596Z - Failed to connect to browser: Waiting for selector `h1` failed: Waiting failed: 30000ms exceeded
+2025-01-23T23:38:15.271Z - Starting Form Fields Setup Journey
+2025-01-23T23:38:15.273Z - Using base URL: http://localhost:3000
+2025-01-23T23:38:15.434Z - Navigating to Form Fields page
+2025-01-23T23:39:29.408Z - Starting Form Fields Setup Journey
+2025-01-23T23:39:29.410Z - Using base URL: http://localhost:3000
+2025-01-23T23:39:29.561Z - Navigating to Form Fields page
+2025-01-23T23:39:56.125Z - Starting Form Fields Setup Journey
+2025-01-23T23:39:56.127Z - Using base URL: http://localhost:3000
+2025-01-23T23:39:56.297Z - Navigating to Form Fields page
+2025-01-23T23:39:57.125Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:39:57.126Z - Adding Street Address field
+2025-01-23T23:39:57.131Z - Error in Form Fields Setup Journey: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text("Add Custom Field")' is not a valid selector.
+2025-01-23T23:39:57.141Z - Failed to connect to browser: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text("Add Custom Field")' is not a valid selector.
+2025-01-23T23:40:39.501Z - Starting Form Fields Setup Journey
+2025-01-23T23:40:39.503Z - Using base URL: http://localhost:3000
+2025-01-23T23:40:39.663Z - Navigating to Form Fields page
+2025-01-23T23:40:40.508Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:40:40.508Z - Adding Street Address field
+2025-01-23T23:42:21.246Z - Starting Form Fields Setup Journey
+2025-01-23T23:42:21.248Z - Using base URL: http://localhost:3000
+2025-01-23T23:42:21.403Z - Navigating to Form Fields page
+2025-01-23T23:42:22.354Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:42:22.354Z - Adding Street Address field
+2025-01-23T23:43:24.990Z - Starting Form Fields Setup Journey
+2025-01-23T23:43:24.992Z - Using base URL: http://localhost:3000
+2025-01-23T23:43:25.148Z - Navigating to Form Fields page
+2025-01-23T23:43:25.937Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:43:25.938Z - Adding Street Address field
+2025-01-23T23:43:26.627Z - Error in Form Fields Setup Journey: page.waitForTimeout is not a function
+2025-01-23T23:43:26.644Z - Failed to connect to browser: page.waitForTimeout is not a function
+2025-01-23T23:44:24.591Z - Starting Form Fields Setup Journey
+2025-01-23T23:44:24.592Z - Using base URL: http://localhost:3000
+2025-01-23T23:44:24.744Z - Navigating to Form Fields page
+2025-01-23T23:44:25.468Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:44:25.468Z - Adding Street Address field
+2025-01-23T23:44:27.320Z - Captured screenshot: 2-street-address-added.png
+2025-01-23T23:44:27.320Z - Adding City field
+2025-01-23T23:44:28.622Z - Captured screenshot: 3-city-added.png
+2025-01-23T23:44:28.622Z - Adding State field
+2025-01-23T23:44:29.955Z - Captured screenshot: 4-state-added.png
+2025-01-23T23:44:29.955Z - Adding ZIP Code field
+2025-01-23T23:44:31.273Z - Captured screenshot: 5-zip-added.png
+2025-01-23T23:44:31.273Z - Adding Preferred Contact Method field
+2025-01-23T23:44:32.585Z - Captured screenshot: 6-contact-method-added.png
+2025-01-23T23:44:32.585Z - Verifying all fields are listed
+2025-01-23T23:44:33.653Z - Captured screenshot: 7-all-fields-listed.png
+2025-01-23T23:44:33.653Z - Navigating to booking page to verify fields
+2025-01-23T23:44:37.169Z - Captured screenshot: 8-booking-form-with-fields.png
+2025-01-23T23:44:37.169Z - Form Fields Setup Journey completed successfully
+2025-01-23T23:46:59.300Z - Starting Form Fields Setup Journey
+2025-01-23T23:46:59.302Z - Using base URL: http://localhost:3000
+2025-01-23T23:46:59.464Z - Navigating to Form Fields page
+2025-01-23T23:47:00.515Z - Captured screenshot: 1-form-fields-page.png
+2025-01-23T23:47:00.515Z - Adding Street Address field
+2025-01-23T23:47:02.451Z - Captured screenshot: 2-street-address-added.png
+2025-01-23T23:47:02.452Z - Adding City field
+2025-01-23T23:47:03.852Z - Captured screenshot: 3-city-added.png
+2025-01-23T23:47:03.852Z - Adding State field
+2025-01-23T23:47:05.152Z - Captured screenshot: 4-state-added.png
+2025-01-23T23:47:05.153Z - Adding ZIP Code field
+2025-01-23T23:47:06.535Z - Captured screenshot: 5-zip-added.png
+2025-01-23T23:47:06.535Z - Adding Preferred Contact Method field
+2025-01-23T23:47:07.935Z - Captured screenshot: 6-contact-method-added.png
+2025-01-23T23:47:07.935Z - Verifying all fields are listed
+2025-01-23T23:47:09.003Z - Captured screenshot: 7-all-fields-listed.png
+2025-01-23T23:47:09.003Z - Navigating to booking page to verify fields
+2025-01-23T23:47:11.235Z - Captured screenshot: 8-booking-form-with-fields.png
+2025-01-23T23:47:11.235Z - Form Fields Setup Journey completed successfully

@@ -25,6 +25,9 @@ This will start a browser in non-headless mode and create a `.browser-ws-endpoin
 
 ### Step 2: Run Individual Journeys
 
+Test User: jacob.sunny@gmail.com
+Test Password: Booki137
+
 You can run any of the following journeys:
 
 #### Journey 1: Provider Setup
