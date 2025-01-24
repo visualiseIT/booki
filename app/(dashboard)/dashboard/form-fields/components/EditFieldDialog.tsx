@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -30,25 +32,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-
-const fieldTypes = [
-  { value: "text", label: "Text" },
-  { value: "number", label: "Number" },
-  { value: "email", label: "Email" },
-  { value: "phone", label: "Phone" },
-  { value: "textarea", label: "Text Area" },
-  { value: "select", label: "Select" },
-  { value: "checkbox", label: "Checkbox" },
-  { value: "radio", label: "Radio" },
-] as const;
+import { Id } from "@/convex/_generated/dataModel";
 
 const formSchema = z.object({
   label: z.string().min(1, "Label is required"),
-  type: z.enum(["text", "number", "email", "phone", "textarea", "select", "checkbox", "radio"]),
+  type: z.string().min(1, "Type is required"),
   required: z.boolean().default(false),
   placeholder: z.string().optional(),
   options: z.string().optional(),
@@ -56,31 +44,14 @@ const formSchema = z.object({
   serviceId: z.string().optional(),
 });
 
-interface Service {
-  _id: Id<"services">;
-  name: string;
-}
-
-interface FormField {
-  _id: Id<"formFields">;
-  label: string;
-  type: string;
-  required: boolean;
-  placeholder?: string;
-  options?: string[];
-  defaultValue?: string;
-  serviceId?: Id<"services">;
-  isActive: boolean;
-}
-
 interface EditFieldDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  services: Service[];
-  field: FormField | null;
+  field: any;
+  services: any[];
 }
 
-export function EditFieldDialog({ open, onOpenChange, services, field }: EditFieldDialogProps) {
+export function EditFieldDialog({ open, onOpenChange, field, services }: EditFieldDialogProps) {
   const { toast } = useToast();
   const updateField = useMutation(api.formFields.update);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -88,37 +59,20 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      label: field?.label || "",
-      type: field?.type as any || "text",
-      required: field?.required || false,
-      placeholder: field?.placeholder || "",
-      options: field?.options?.join(", ") || "",
-      defaultValue: field?.defaultValue || "",
-      serviceId: field?.serviceId || "",
+      label: field.label,
+      type: field.type,
+      required: field.required,
+      placeholder: field.placeholder || "",
+      options: field.options?.join(", ") || "",
+      defaultValue: field.defaultValue || "",
+      serviceId: field.serviceId || "_all",
     },
   });
-
-  // Update form when field changes
-  useEffect(() => {
-    if (field) {
-      form.reset({
-        label: field.label,
-        type: field.type as any,
-        required: field.required,
-        placeholder: field.placeholder || "",
-        options: field.options?.join(", ") || "",
-        defaultValue: field.defaultValue || "",
-        serviceId: field.serviceId || "",
-      });
-    }
-  }, [field, form]);
 
   const selectedType = form.watch("type");
   const needsOptions = ["select", "checkbox", "radio"].includes(selectedType);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!field) return;
-    
     setIsSubmitting(true);
     try {
       const options = values.options
@@ -129,7 +83,7 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
         id: field._id,
         ...values,
         options,
-        serviceId: values.serviceId ? (values.serviceId as Id<"services">) : undefined,
+        serviceId: values.serviceId === "_all" ? undefined : values.serviceId as Id<"services">,
       });
 
       toast({
@@ -148,8 +102,6 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
       setIsSubmitting(false);
     }
   };
-
-  if (!field) return null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -179,23 +131,26 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Field Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a field type" />
+                        <SelectValue placeholder="Select field type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {fieldTypes.map(type => (
-                        <SelectItem key={type.value} value={type.value}>
-                          {type.label}
-                        </SelectItem>
-                      ))}
+                      <SelectItem value="text">Text</SelectItem>
+                      <SelectItem value="number">Number</SelectItem>
+                      <SelectItem value="email">Email</SelectItem>
+                      <SelectItem value="phone">Phone</SelectItem>
+                      <SelectItem value="textarea">Text Area</SelectItem>
+                      <SelectItem value="select">Select</SelectItem>
+                      <SelectItem value="checkbox">Checkbox</SelectItem>
+                      <SelectItem value="radio">Radio</SelectItem>
                     </SelectContent>
                   </Select>
+                  <FormDescription>
+                    Choose the type of field to add to your form
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -259,7 +214,7 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
                   <FormLabel>Service (Optional)</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value || "_all"}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -267,7 +222,7 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="">All Services</SelectItem>
+                      <SelectItem value="_all">All Services</SelectItem>
                       {services.map(service => (
                         <SelectItem key={service._id} value={service._id}>
                           {service.name}
@@ -283,28 +238,7 @@ export function EditFieldDialog({ open, onOpenChange, services, field }: EditFie
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="required"
-              render={({ field }) => (
-                <FormItem className="flex items-center justify-between rounded-lg border p-3">
-                  <div className="space-y-0.5">
-                    <FormLabel>Required Field</FormLabel>
-                    <FormDescription>
-                      Make this field mandatory in the booking form
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <div className="flex justify-end gap-3">
+            <div className="flex justify-end space-x-2">
               <Button
                 type="button"
                 variant="outline"

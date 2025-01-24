@@ -147,23 +147,26 @@ export function AddFieldDialog({ open, onOpenChange, services }: AddFieldDialogP
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Field Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a field type" />
+                        <SelectValue placeholder="Select field type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {fieldTypes.map(type => (
-                        <SelectItem key={type.value} value={type.value}>
-                          {type.label}
-                        </SelectItem>
-                      ))}
+                      <SelectItem value="text">Text</SelectItem>
+                      <SelectItem value="number">Number</SelectItem>
+                      <SelectItem value="email">Email</SelectItem>
+                      <SelectItem value="phone">Phone</SelectItem>
+                      <SelectItem value="textarea">Text Area</SelectItem>
+                      <SelectItem value="select">Select</SelectItem>
+                      <SelectItem value="checkbox">Checkbox</SelectItem>
+                      <SelectItem value="radio">Radio</SelectItem>
                     </SelectContent>
                   </Select>
+                  <FormDescription>
+                    Choose the type of field to add to your form
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

@@ -11,120 +11,122 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { AddFieldDialog } from "./components/AddFieldDialog";
 import { EditFieldDialog } from "./components/EditFieldDialog";
+import { Id } from "@/convex/_generated/dataModel";
 
 export default function FormFieldsPage() {
   const router = useRouter();
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedField, setSelectedField] = useState<any | null>(null);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [addDialogOpen, setAddDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedField, setSelectedField] = useState<any>(null);
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
   const provider = useQuery(api.providers.getProvider);
   const services = useQuery(api.services.getServices, 
     provider ? { providerId: provider._id } : "skip"
   );
-  const formFields = useQuery(api.formFields.list, 
+  const fields = useQuery(api.formFields.list,
     provider ? { providerId: provider._id } : "skip"
   );
-
-  const toggleFieldStatus = useMutation(api.formFields.toggleStatus);
+  const toggleStatus = useMutation(api.formFields.toggleStatus);
 
   if (!provider) {
     return (
-      <div className="container mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6">Custom Form Fields</h1>
-        <Card className="p-6">
-          <p>Please complete your provider profile first.</p>
-          <Button asChild className="mt-4">
-            <Link href="/dashboard/profile">Complete Profile</Link>
-          </Button>
-        </Card>
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+          <div className="flex">
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">
+                Complete your profile setup to manage form fields
+              </p>
+              <div className="mt-4">
+                <Link
+                  href="/dashboard/profile"
+                  className="text-sm font-medium text-yellow-700 hover:text-yellow-600"
+                >
+                  Complete Setup <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
-  const filteredFields = selectedService
-    ? formFields?.filter(field => !field.serviceId || field.serviceId === selectedService)
-    : formFields;
-
-  const handleEdit = (field: any) => {
-    setSelectedField(field);
-    setIsEditDialogOpen(true);
-  };
+  const filteredFields = selectedServiceId
+    ? fields?.filter(field => field.serviceId === selectedServiceId)
+    : fields;
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-center gap-4 mb-8">
-        <Button variant="outline" size="icon" asChild>
-          <Link href="/dashboard">
-            <ArrowLeft className="h-4 w-4" />
+    <div className="max-w-4xl mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <Link href="/dashboard" className="hover:opacity-75">
+            <ArrowLeft className="h-6 w-6" />
           </Link>
-        </Button>
-        <div>
           <h1 className="text-2xl font-bold">Custom Form Fields</h1>
-          <p className="text-muted-foreground">
-            Customize the fields in your booking form
-          </p>
         </div>
+        <Button onClick={() => setAddDialogOpen(true)}>Add Custom Field</Button>
       </div>
 
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex gap-2">
-          <Button
-            variant={selectedService === null ? "default" : "outline"}
-            onClick={() => setSelectedService(null)}
-          >
-            All Fields
-          </Button>
-          {services?.map(service => (
+      {services && services.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-sm font-medium text-gray-500 mb-2">Filter by Service</h2>
+          <div className="flex gap-2">
             <Button
-              key={service._id}
-              variant={selectedService === service._id ? "default" : "outline"}
-              onClick={() => setSelectedService(service._id)}
+              variant={selectedServiceId === null ? "secondary" : "outline"}
+              onClick={() => setSelectedServiceId(null)}
             >
-              {service.name}
+              All Services
             </Button>
-          ))}
+            {services.map(service => (
+              <Button
+                key={service._id}
+                variant={selectedServiceId === service._id ? "secondary" : "outline"}
+                onClick={() => setSelectedServiceId(service._id)}
+              >
+                {service.name}
+              </Button>
+            ))}
+          </div>
         </div>
-        <Button onClick={() => setIsAddDialogOpen(true)}>
-          Add Custom Field
-        </Button>
-      </div>
+      )}
 
-      <div className="grid gap-4">
+      <div className="space-y-4">
         {filteredFields?.map(field => (
           <Card key={field._id} className="p-4">
-            <div className="flex items-start justify-between">
+            <div className="flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-semibold">{field.label}</h3>
-                  {field.required && (
-                    <Badge variant="secondary">Required</Badge>
-                  )}
-                  {field.serviceId && services?.find(s => s._id === field.serviceId) && (
-                    <Badge variant="outline">
-                      {services.find(s => s._id === field.serviceId)?.name}
-                    </Badge>
-                  )}
-                </div>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-medium">{field.label}</h3>
+                <p className="text-sm text-gray-500">
                   Type: {field.type}
-                  {field.placeholder && ` • Placeholder: ${field.placeholder}`}
-                  {field.options?.length && ` • Options: ${field.options.join(", ")}`}
+                  {field.serviceId && services && (
+                    <>
+                      {" • "}
+                      Service:{" "}
+                      {services.find(s => s._id === field.serviceId)?.name}
+                    </>
+                  )}
                 </p>
               </div>
               <div className="flex items-center gap-2">
+                <Badge variant={field.isActive ? "default" : "secondary"}>
+                  {field.isActive ? "Active" : "Disabled"}
+                </Badge>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleEdit(field)}
+                  onClick={() => {
+                    setSelectedField(field);
+                    setEditDialogOpen(true);
+                  }}
                 >
                   Edit
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
-                  onClick={() => toggleFieldStatus({ id: field._id })}
+                  onClick={() => toggleStatus({ id: field._id })}
                 >
                   {field.isActive ? "Disable" : "Enable"}
                 </Button>
@@ -132,28 +134,29 @@ export default function FormFieldsPage() {
             </div>
           </Card>
         ))}
-
-        {(!filteredFields || filteredFields.length === 0) && (
-          <Card className="p-6">
-            <p className="text-center text-muted-foreground">
-              No custom fields found. Add your first custom field to enhance your booking form.
-            </p>
-          </Card>
+        {filteredFields?.length === 0 && (
+          <p className="text-center text-gray-500 py-8">
+            No custom fields found. Click "Add Custom Field" to create one.
+          </p>
         )}
       </div>
 
-      <AddFieldDialog 
-        open={isAddDialogOpen}
-        onOpenChange={setIsAddDialogOpen}
-        services={services || []}
-      />
+      {services && (
+        <AddFieldDialog
+          open={addDialogOpen}
+          onOpenChange={setAddDialogOpen}
+          services={services}
+        />
+      )}
 
-      <EditFieldDialog
-        open={isEditDialogOpen}
-        onOpenChange={setIsEditDialogOpen}
-        services={services || []}
-        field={selectedField}
-      />
+      {services && selectedField && (
+        <EditFieldDialog
+          open={editDialogOpen}
+          onOpenChange={setEditDialogOpen}
+          field={selectedField}
+          services={services}
+        />
+      )}
     </div>
   );
 } 
