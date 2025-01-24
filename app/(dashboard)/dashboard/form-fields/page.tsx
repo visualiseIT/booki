@@ -12,9 +12,11 @@ import { api } from "@/convex/_generated/api";
 import { AddFieldDialog } from "./components/AddFieldDialog";
 import { EditFieldDialog } from "./components/EditFieldDialog";
 import { Id } from "@/convex/_generated/dataModel";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function FormFieldsPage() {
   const router = useRouter();
+  const { toast } = useToast();
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedField, setSelectedField] = useState<any>(null);
@@ -28,6 +30,23 @@ export default function FormFieldsPage() {
     provider ? { providerId: provider._id } : "skip"
   );
   const toggleStatus = useMutation(api.formFields.toggleStatus);
+  const deleteField = useMutation(api.formFields.deleteField);
+
+  const handleDelete = async (fieldId: Id<"formFields">) => {
+    try {
+      await deleteField({ id: fieldId });
+      toast({
+        title: "Field deleted",
+        description: "The custom field has been deleted successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete custom field. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (!provider) {
     return (
@@ -129,6 +148,13 @@ export default function FormFieldsPage() {
                   onClick={() => toggleStatus({ id: field._id })}
                 >
                   {field.isActive ? "Disable" : "Enable"}
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => handleDelete(field._id)}
+                >
+                  Delete
                 </Button>
               </div>
             </div>

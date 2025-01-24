@@ -156,4 +156,27 @@ export const getFieldsForService = query({
 
     return fields;
   },
+});
+
+export const deleteField = mutation({
+  args: { id: v.id("formFields") },
+  async handler(ctx, args) {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const field = await ctx.db.get(args.id);
+    if (!field) throw new Error("Field not found");
+
+    // Get the provider to verify ownership
+    const provider = await ctx.db
+      .query("providers")
+      .withIndex("by_userId", q => q.eq("userId", identity.subject))
+      .first();
+    
+    if (!provider || field.providerId !== provider._id) {
+      throw new Error("Not authorized to delete this field");
+    }
+
+    await ctx.db.delete(args.id);
+  },
 }); 
