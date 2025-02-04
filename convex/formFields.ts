@@ -135,26 +135,29 @@ export const toggleStatus = mutation({
 
 export const getFieldsForService = query({
   args: {
-    providerId: v.id("providers"),
     serviceId: v.optional(v.id("services")),
   },
-  handler: async (ctx, args) => {
-    const fields = await ctx.db
-      .query("formFields")
-      .withIndex("by_providerId", q => q.eq("providerId", args.providerId))
-      .filter(q => 
-        q.and(
-          q.eq(q.field("isActive"), true),
-          q.or(
-            q.eq(q.field("serviceId"), null),
-            args.serviceId ? q.eq(q.field("serviceId"), args.serviceId) : q.eq(q.field("serviceId"), null)
-          )
-        )
-      )
-      .order("asc")
-      .collect();
+  async handler(ctx, args) {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
 
-    return fields;
+    const provider = await ctx.db
+      .query("providers")
+      .withIndex("by_userId", q => q.eq("userId", identity.subject))
+      .first();
+    
+    if (!provider) return [];
+
+    const query = ctx.db
+      .query("formFields")
+      .withIndex("by_providerId", q => q.eq("providerId", provider._id))
+      .filter(q => q.eq(q.field("isActive"), true));
+
+    if (args.serviceId) {
+      return await query.filter(q => q.eq(q.field("serviceId"), args.serviceId)).collect();
+    }
+
+    return await query.collect();
   },
 });
 

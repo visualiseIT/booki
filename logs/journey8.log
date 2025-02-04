@@ -1,0 +1,146 @@
+2025-01-24T00:40:05.286Z - Starting Service Custom Fields Journey
+2025-01-24T00:40:05.443Z - Navigating to services page
+2025-01-24T00:40:06.928Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:40:06.928Z - Clicking Edit button on first service
+2025-01-24T00:40:06.932Z - Error: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text("Edit")' is not a valid selector.
+2025-01-24T00:40:59.634Z - Starting Service Custom Fields Journey
+2025-01-24T00:40:59.783Z - Navigating to services page
+2025-01-24T00:41:00.979Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:41:00.980Z - Clicking Edit button on first service
+2025-01-24T00:41:01.013Z - Error: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text("Edit")' is not a valid selector.
+2025-01-24T00:42:31.895Z - Starting Service Custom Fields Journey
+2025-01-24T00:42:32.050Z - Navigating to services page
+2025-01-24T00:42:33.407Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:42:33.407Z - Clicking Edit button on first service
+2025-01-24T00:42:33.411Z - Error: No element found for selector: [data-testid="edit-service-button"]
+2025-01-24T00:47:49.989Z - Starting Service Custom Fields Journey
+2025-01-24T00:47:50.145Z - Navigating to services page
+2025-01-24T00:47:51.489Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:47:51.489Z - Waiting for services to load...
+2025-01-24T00:47:51.495Z - Clicking Edit button on first service
+2025-01-24T00:47:52.641Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T00:47:52.641Z - Clicking Manage Required Fields button
+2025-01-24T00:47:53.738Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T00:47:53.739Z - Clicking Add Field button
+2025-01-24T00:50:42.453Z - Starting Service Custom Fields Journey
+2025-01-24T00:50:42.611Z - Navigating to services page
+2025-01-24T00:50:42.950Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T00:50:43.181Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T00:50:43.753Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:50:43.753Z - Waiting for services to load...
+2025-01-24T00:50:43.757Z - Clicking Edit button on first service
+2025-01-24T00:50:43.823Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:50:43.826Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:50:44.921Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T00:50:44.922Z - Clicking Manage Required Fields button
+2025-01-24T00:50:44.936Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:50:44.937Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:50:46.019Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T00:50:46.019Z - Clicking Add Field button
+2025-01-24T00:50:46.049Z - Browser Console [error]: %o
+
+%s JSHandle@error The above error occurred in the <Controller> component. It was handled by the <ReactDevOverlay> error boundary.
+2025-01-24T00:51:16.075Z - Error: Waiting for selector `form` failed: Waiting failed: 30000ms exceeded
+2025-01-24T00:56:46.731Z - Starting Service Custom Fields Journey
+2025-01-24T00:56:46.889Z - Navigating to services page
+2025-01-24T00:56:47.432Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T00:56:47.665Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T00:56:48.174Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:56:48.175Z - Waiting for services to load...
+2025-01-24T00:56:48.181Z - Clicking Edit button on first service
+2025-01-24T00:56:48.240Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:56:48.244Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:56:49.351Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T00:56:49.351Z - Clicking Manage Required Fields button
+2025-01-24T00:56:49.365Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:56:49.367Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:56:50.497Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T00:56:50.497Z - Clicking Add Field button
+2025-01-24T00:56:50.529Z - Browser Console [error]: %o
+
+%s JSHandle@error The above error occurred in the <Controller> component. It was handled by the <ReactDevOverlay> error boundary.
+2025-01-24T00:56:55.553Z - Error: Waiting for selector `input[id="label"]` failed: Waiting failed: 5000ms exceeded
+2025-01-24T00:57:52.384Z - Starting Service Custom Fields Journey
+2025-01-24T00:57:52.542Z - Navigating to services page
+2025-01-24T00:57:52.883Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T00:57:53.118Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T00:57:53.696Z - Captured screenshot: 1-services-page.png
+2025-01-24T00:57:53.696Z - Waiting for services to load...
+2025-01-24T00:57:53.701Z - Clicking Edit button on first service
+2025-01-24T00:57:53.766Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:57:53.781Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:57:54.863Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T00:57:54.863Z - Clicking Manage Required Fields button
+2025-01-24T00:57:54.877Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:57:54.879Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T00:57:55.963Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T00:57:55.964Z - Clicking Add Field button
+2025-01-24T00:57:55.996Z - Browser Console [error]: %o
+
+%s JSHandle@error The above error occurred in the <Controller> component. It was handled by the <ReactDevOverlay> error boundary.
+2025-01-24T00:57:56.017Z - Browser Page Error: DOMException: SyntaxError: Failed to execute 'querySelector' on 'Document': 'h2:has-text("Add Custom Field")' is not a valid selector.
+2025-01-24T00:58:01.015Z - Error: Waiting for selector `h2:has-text("Add Custom Field")` failed: Waiting failed: 5000ms exceeded
+2025-01-24T01:04:13.793Z - Browser Console [log]: [Fast Refresh] rebuilding
+2025-01-24T01:04:14.125Z - Browser Console [warn]: [Fast Refresh] performing full reload because your application had an unrecoverable error
+2025-01-24T01:04:14.441Z - Browser Console [log]: [Fast Refresh] rebuilding
+2025-01-24T01:04:14.766Z - Browser Console [warn]: [Fast Refresh] performing full reload because your application had an unrecoverable error
+2025-01-24T01:04:16.132Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T01:04:16.410Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T01:04:26.713Z - Starting Service Custom Fields Journey
+2025-01-24T01:04:26.871Z - Navigating to services page
+2025-01-24T01:04:27.299Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T01:04:27.449Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T01:04:28.026Z - Captured screenshot: 1-services-page.png
+2025-01-24T01:04:28.026Z - Waiting for services to load...
+2025-01-24T01:04:28.032Z - Clicking Edit button on first service
+2025-01-24T01:04:28.165Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:28.169Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:29.261Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T01:04:29.261Z - Clicking Manage Required Fields button
+2025-01-24T01:04:29.275Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:29.276Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:30.361Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T01:04:30.361Z - Clicking Add Field button
+2025-01-24T01:04:30.380Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:30.383Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:04:30.422Z - Browser Page Error: DOMException: SyntaxError: Failed to execute 'querySelector' on 'Document': 'h2:has-text("Add Custom Field")' is not a valid selector.
+2025-01-24T01:04:35.418Z - Error: Waiting for selector `h2:has-text("Add Custom Field")` failed: Waiting failed: 5000ms exceeded
+2025-01-24T01:05:46.525Z - Browser Console [log]: [Fast Refresh] rebuilding
+2025-01-24T01:05:46.873Z - Browser Console [log]: [Fast Refresh] done in 348ms
+2025-01-24T01:05:47.881Z - Failed Request: http://localhost:3000/dashboard/services?_rsc=9v4bw - net::ERR_ABORTED
+2025-01-24T01:05:52.707Z - Starting Service Custom Fields Journey
+2025-01-24T01:05:52.873Z - Navigating to services page
+2025-01-24T01:05:53.290Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T01:05:53.447Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T01:05:54.171Z - Captured screenshot: 1-services-page.png
+2025-01-24T01:05:54.171Z - Waiting for services to load...
+2025-01-24T01:05:54.175Z - Clicking Edit button on first service
+2025-01-24T01:05:54.241Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:54.243Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:55.325Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T01:05:55.325Z - Clicking Manage Required Fields button
+2025-01-24T01:05:55.338Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:55.340Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:56.407Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T01:05:56.407Z - Clicking Add Field button
+2025-01-24T01:05:56.507Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:56.509Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:05:57.517Z - Error: Add Custom Field dialog did not open properly
+2025-01-24T01:06:40.935Z - Starting Service Custom Fields Journey
+2025-01-24T01:06:41.111Z - Navigating to services page
+2025-01-24T01:06:41.469Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-01-24T01:06:41.619Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-01-24T01:06:42.301Z - Captured screenshot: 1-services-page.png
+2025-01-24T01:06:42.301Z - Waiting for services to load...
+2025-01-24T01:06:42.305Z - Clicking Edit button on first service
+2025-01-24T01:06:42.392Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:42.395Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:43.475Z - Captured screenshot: 2-edit-service-dialog.png
+2025-01-24T01:06:43.475Z - Clicking Manage Required Fields button
+2025-01-24T01:06:43.491Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:43.493Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:44.576Z - Captured screenshot: 3-required-fields-dialog.png
+2025-01-24T01:06:44.576Z - Clicking Add Field button
+2025-01-24T01:06:44.595Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:44.598Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-01-24T01:06:45.642Z - Error: Add Custom Field dialog did not open properly

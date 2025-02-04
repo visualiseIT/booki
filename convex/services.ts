@@ -78,4 +78,39 @@ export const create = mutation({
 
     return service;
   },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("services"),
+    name: v.string(),
+    description: v.string(),
+    duration: v.number(),
+    price: v.number(),
+    isActive: v.boolean(),
+  },
+  async handler(ctx, args) {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const service = await ctx.db.get(args.id);
+    if (!service) throw new Error("Service not found");
+
+    const provider = await ctx.db
+      .query("providers")
+      .withIndex("by_userId", q => q.eq("userId", identity.subject))
+      .first();
+    
+    if (!provider || service.providerId !== provider._id) {
+      throw new Error("Not authorized to update this service");
+    }
+
+    await ctx.db.patch(args.id, {
+      name: args.name,
+      description: args.description,
+      duration: args.duration,
+      price: args.price,
+      isActive: args.isActive,
+    });
+  },
 }); 
