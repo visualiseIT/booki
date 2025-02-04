@@ -30,18 +30,7 @@ interface BookingFormProps {
 
 export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormProps) {
   const { toast } = useToast();
-  
-  console.log('[BookingForm] Props:', { providerId, serviceId });
-  
-  const customFields = useQuery(api.formFields.getFieldsForService, {
-    serviceId,
-  });
-
-  console.log('[BookingForm] Custom Fields Query Result:', {
-    customFields,
-    isArray: Array.isArray(customFields),
-    length: customFields?.length,
-  });
+  const customFields = useQuery(api.formFields.getFieldsForService, { serviceId });
 
   // Dynamically build form schema based on custom fields
   const formSchema = z.object({
@@ -53,7 +42,6 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
     notes: z.string().optional(),
     ...Object.fromEntries(
       (customFields || []).map(field => {
-        console.log('[BookingForm] Processing field for schema:', field);
         let validator = z.string();
         if (field.type === "number") {
           validator = z.string().transform(Number);
@@ -81,16 +69,10 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
       time: "",
       notes: "",
       ...Object.fromEntries(
-        (customFields || []).map(field => {
-          console.log('[BookingForm] Setting default value for field:', {
-            fieldId: field._id,
-            defaultValue: field.defaultValue
-          });
-          return [
-            field._id.toString(),
-            field.defaultValue || "",
-          ];
-        })
+        (customFields || []).map(field => [
+          field._id.toString(),
+          field.defaultValue || "",
+        ])
       ),
     },
   });
@@ -132,7 +114,6 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
   }
 
   function renderCustomField(field: any) {
-    console.log('[BookingForm] Rendering custom field:', field);
     const id = field._id.toString();
 
     return (
@@ -141,11 +122,6 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
         control={form.control}
         name={id}
         render={({ field: formField }) => {
-          console.log('[BookingForm] Form field render:', {
-            id,
-            type: field.type,
-            value: formField.value
-          });
           return (
             <FormItem>
               <FormLabel>{field.label}{field.required && " *"}</FormLabel>

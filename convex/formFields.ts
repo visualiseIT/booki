@@ -55,8 +55,12 @@ export const create = mutation({
 
     const order = lastField ? lastField.order + 1 : 0;
 
+    // If serviceId is "_all", set it to null
+    const serviceId = args.serviceId === "_all" ? null : args.serviceId;
+
     const fieldId = await ctx.db.insert("formFields", {
       ...args,
+      serviceId,
       providerId: provider._id,
       order,
       isActive: true,
@@ -95,6 +99,9 @@ export const update = mutation({
       throw new Error("Not authorized to update this field");
     }
 
+    // If serviceId is "_all", set it to null
+    const serviceId = args.serviceId === "_all" ? null : args.serviceId;
+
     return await ctx.db.patch(args.id, {
       label: args.label,
       type: args.type,
@@ -102,7 +109,7 @@ export const update = mutation({
       placeholder: args.placeholder,
       options: args.options,
       defaultValue: args.defaultValue,
-      serviceId: args.serviceId,
+      serviceId,
     });
   },
 });
@@ -144,9 +151,7 @@ export const getFieldsForService = query({
     const service = await ctx.db.get(args.serviceId);
     if (!service) return [];
 
-    // Get all active fields that are either:
-    // 1. Specific to this service, or
-    // 2. General fields (no specific service)
+    // Get all fields for this provider
     return await ctx.db
       .query("formFields")
       .withIndex("by_providerId", q => q.eq("providerId", service.providerId))
@@ -155,7 +160,8 @@ export const getFieldsForService = query({
           q.eq(q.field("isActive"), true),
           q.or(
             q.eq(q.field("serviceId"), args.serviceId),
-            q.eq(q.field("serviceId"), null)
+            q.eq(q.field("serviceId"), null),
+            q.eq(q.field("serviceId"), undefined)
           )
         )
       )
