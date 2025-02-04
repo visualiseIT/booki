@@ -144,3 +144,29 @@
 2025-01-24T01:06:44.595Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
 2025-01-24T01:06:44.598Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
 2025-01-24T01:06:45.642Z - Error: Add Custom Field dialog did not open properly
+2025-02-04T12:16:36.328Z - Starting Service Custom Fields Journey
+2025-02-04T12:16:36.457Z - Navigating to services page
+2025-02-04T12:16:37.342Z - Browser Console [warn]: The Sentry loader you are trying to use isn't working anymore, check your configuration.
+2025-02-04T12:16:37.535Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-02-04T12:16:38.085Z - Browser Console [verbose]: [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o
+2025-02-04T12:16:38.149Z - Captured screenshot: 1-services-page.png
+2025-02-04T12:16:38.149Z - Waiting for services to load...
+2025-02-04T12:16:43.149Z - Error: Waiting for selector `.space-y-4` failed: Waiting failed: 5000ms exceeded
+2025-02-04T12:17:38.806Z - Starting Service Custom Fields Journey
+2025-02-04T12:17:38.935Z - Navigating to services page
+2025-02-04T12:17:39.281Z - Browser Console [info]: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2025-02-04T12:17:39.427Z - Browser Console [warn]: Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+2025-02-04T12:17:40.087Z - Captured screenshot: 1-services-page.png
+2025-02-04T12:17:40.087Z - Waiting for services to load...
+2025-02-04T12:17:40.096Z - Clicking Edit button on first service
+2025-02-04T12:17:40.132Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:40.135Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:41.241Z - Captured screenshot: 2-edit-service-dialog.png
+2025-02-04T12:17:41.241Z - Clicking Manage Required Fields button
+2025-02-04T12:17:41.256Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:41.258Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:42.343Z - Captured screenshot: 3-required-fields-dialog.png
+2025-02-04T12:17:42.343Z - Clicking Add Field button
+2025-02-04T12:17:42.366Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:42.369Z - Browser Console [warn]: Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+2025-02-04T12:17:43.407Z - Error: Add Custom Field dialog did not open properly

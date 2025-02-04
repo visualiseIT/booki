@@ -138,26 +138,28 @@ export const getFieldsForService = query({
     serviceId: v.optional(v.id("services")),
   },
   async handler(ctx, args) {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return [];
+    if (!args.serviceId) return [];
 
-    const provider = await ctx.db
-      .query("providers")
-      .withIndex("by_userId", q => q.eq("userId", identity.subject))
-      .first();
-    
-    if (!provider) return [];
+    // Get the service to find its provider
+    const service = await ctx.db.get(args.serviceId);
+    if (!service) return [];
 
-    const query = ctx.db
+    // Get all active fields that are either:
+    // 1. Specific to this service, or
+    // 2. General fields (no specific service)
+    return await ctx.db
       .query("formFields")
-      .withIndex("by_providerId", q => q.eq("providerId", provider._id))
-      .filter(q => q.eq(q.field("isActive"), true));
-
-    if (args.serviceId) {
-      return await query.filter(q => q.eq(q.field("serviceId"), args.serviceId)).collect();
-    }
-
-    return await query.collect();
+      .withIndex("by_providerId", q => q.eq("providerId", service.providerId))
+      .filter(q => 
+        q.and(
+          q.eq(q.field("isActive"), true),
+          q.or(
+            q.eq(q.field("serviceId"), args.serviceId),
+            q.eq(q.field("serviceId"), null)
+          )
+        )
+      )
+      .collect();
   },
 });
 

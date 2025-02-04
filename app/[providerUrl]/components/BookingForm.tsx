@@ -30,9 +30,17 @@ interface BookingFormProps {
 
 export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormProps) {
   const { toast } = useToast();
+  
+  console.log('[BookingForm] Props:', { providerId, serviceId });
+  
   const customFields = useQuery(api.formFields.getFieldsForService, {
-    providerId,
     serviceId,
+  });
+
+  console.log('[BookingForm] Custom Fields Query Result:', {
+    customFields,
+    isArray: Array.isArray(customFields),
+    length: customFields?.length,
   });
 
   // Dynamically build form schema based on custom fields
@@ -45,6 +53,7 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
     notes: z.string().optional(),
     ...Object.fromEntries(
       (customFields || []).map(field => {
+        console.log('[BookingForm] Processing field for schema:', field);
         let validator = z.string();
         if (field.type === "number") {
           validator = z.string().transform(Number);
@@ -72,10 +81,16 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
       time: "",
       notes: "",
       ...Object.fromEntries(
-        (customFields || []).map(field => [
-          field._id.toString(),
-          field.defaultValue || "",
-        ])
+        (customFields || []).map(field => {
+          console.log('[BookingForm] Setting default value for field:', {
+            fieldId: field._id,
+            defaultValue: field.defaultValue
+          });
+          return [
+            field._id.toString(),
+            field.defaultValue || "",
+          ];
+        })
       ),
     },
   });
@@ -117,6 +132,7 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
   }
 
   function renderCustomField(field: any) {
+    console.log('[BookingForm] Rendering custom field:', field);
     const id = field._id.toString();
 
     return (
@@ -124,83 +140,104 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
         key={id}
         control={form.control}
         name={id}
-        render={({ field: formField }) => (
-          <FormItem>
-            <FormLabel>{field.label}{field.required && " *"}</FormLabel>
-            <FormControl>
+        render={({ field: formField }) => {
+          console.log('[BookingForm] Form field render:', {
+            id,
+            type: field.type,
+            value: formField.value
+          });
+          return (
+            <FormItem>
+              <FormLabel>{field.label}{field.required && " *"}</FormLabel>
               {field.type === "text" && (
-                <Input
-                  placeholder={field.placeholder}
-                  {...formField}
-                />
+                <FormControl>
+                  <Input
+                    placeholder={field.placeholder}
+                    {...formField}
+                  />
+                </FormControl>
               )}
               {field.type === "number" && (
-                <Input
-                  type="number"
-                  placeholder={field.placeholder}
-                  {...formField}
-                />
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder={field.placeholder}
+                    {...formField}
+                  />
+                </FormControl>
               )}
               {field.type === "email" && (
-                <Input
-                  type="email"
-                  placeholder={field.placeholder}
-                  {...formField}
-                />
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder={field.placeholder}
+                    {...formField}
+                  />
+                </FormControl>
               )}
               {field.type === "phone" && (
-                <Input
-                  type="tel"
-                  placeholder={field.placeholder}
-                  {...formField}
-                />
+                <FormControl>
+                  <Input
+                    type="tel"
+                    placeholder={field.placeholder}
+                    {...formField}
+                  />
+                </FormControl>
               )}
               {field.type === "textarea" && (
-                <Textarea
-                  placeholder={field.placeholder}
-                  {...formField}
-                />
+                <FormControl>
+                  <Textarea
+                    placeholder={field.placeholder}
+                    {...formField}
+                  />
+                </FormControl>
               )}
               {field.type === "select" && field.options && (
-                <Select
-                  onValueChange={formField.onChange}
-                  defaultValue={formField.value}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder={field.placeholder} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {field.options.map((option: string) => (
-                      <SelectItem key={option} value={option}>
-                        {option}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <Select
+                    onValueChange={formField.onChange}
+                    defaultValue={formField.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={field.placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {field.options.map((option: string) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
               )}
               {field.type === "checkbox" && (
-                <Checkbox
-                  checked={formField.value === "true"}
-                  onCheckedChange={checked => formField.onChange(checked ? "true" : "false")}
-                />
+                <FormControl>
+                  <Checkbox
+                    checked={formField.value === "true"}
+                    onCheckedChange={checked => formField.onChange(checked ? "true" : "false")}
+                  />
+                </FormControl>
               )}
               {field.type === "radio" && field.options && (
-                <RadioGroup
-                  onValueChange={formField.onChange}
-                  defaultValue={formField.value}
-                >
-                  {field.options.map((option: string) => (
-                    <div key={option} className="flex items-center space-x-2">
-                      <RadioGroupItem value={option} id={`${id}-${option}`} />
-                      <label htmlFor={`${id}-${option}`}>{option}</label>
-                    </div>
-                  ))}
-                </RadioGroup>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={formField.onChange}
+                    defaultValue={formField.value}
+                  >
+                    {field.options.map((option: string) => (
+                      <div key={option} className="flex items-center space-x-2">
+                        <RadioGroupItem value={option} id={`${id}-${option}`} />
+                        <label htmlFor={`${id}-${option}`}>{option}</label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
               )}
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
+              <FormMessage />
+            </FormItem>
+          );
+        }}
       />
     );
   }

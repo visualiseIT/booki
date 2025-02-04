@@ -13,6 +13,7 @@ import { use } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
+import { BookingForm } from "./components/BookingForm";
 
 interface BookingFormData {
   name: string;
@@ -151,7 +152,10 @@ export default function BookingPage({
                       <p>${service.price}</p>
                     </div>
                   </div>
-                  <Dialog open={selectedServiceId === service._id} onOpenChange={(open) => setSelectedServiceId(open ? service._id : null)}>
+                  <Dialog 
+                    open={selectedServiceId === service._id} 
+                    onOpenChange={(open) => setSelectedServiceId(open ? service._id : null)}
+                  >
                     <DialogTrigger asChild>
                       <Button>Book</Button>
                     </DialogTrigger>
@@ -162,76 +166,11 @@ export default function BookingPage({
                           Fill in your details to schedule an appointment.
                         </DialogDescription>
                       </DialogHeader>
-                      <form 
-                        onSubmit={handleSubmit(onSubmit)} 
-                        className="space-y-4" 
-                        id="booking-form"
-                        data-testid="booking-form"
-                      >
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Your Name</Label>
-                          <Input 
-                            id="name" 
-                            placeholder="John Smith"
-                            {...register("name", { required: true })}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email</Label>
-                          <Input 
-                            id="email" 
-                            type="email"
-                            placeholder="john@example.com"
-                            {...register("email", { required: true })}
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="date">Date</Label>
-                            <Input 
-                              id="date" 
-                              type="date"
-                              min={new Date().toISOString().split('T')[0]}
-                              {...register("date", { required: true })}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="time">Time</Label>
-                            <Input 
-                              id="time" 
-                              type="time"
-                              {...register("time", { required: true })}
-                            />
-                          </div>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="notes">Notes (optional)</Label>
-                          <Textarea 
-                            id="notes" 
-                            placeholder="Any special requests or information..."
-                            {...register("notes")}
-                          />
-                        </div>
-                        <div className="flex justify-end space-x-2 pt-4">
-                          <Button 
-                            variant="outline" 
-                            onClick={() => {
-                              setSelectedServiceId(null);
-                              reset();
-                            }} 
-                            type="button"
-                          >
-                            Cancel
-                          </Button>
-                          <Button 
-                            type="submit" 
-                            disabled={isSubmitting}
-                            data-testid="confirm-booking"
-                          >
-                            {isSubmitting ? "Confirming..." : "Confirm Booking"}
-                          </Button>
-                        </div>
-                      </form>
+                      <BookingForm
+                        providerId={provider._id}
+                        serviceId={service._id}
+                        onSuccess={() => setSelectedServiceId(null)}
+                      />
                     </DialogContent>
                   </Dialog>
                 </div>
