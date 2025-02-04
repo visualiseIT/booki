@@ -67,13 +67,13 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
       name: "",
       email: "",
       phone: "",
-      date: initialDate || "",
-      time: initialTime || "",
+      date: initialDate,
+      time: initialTime,
       notes: "",
       ...Object.fromEntries(
         (customFields || []).map(field => [
           field._id.toString(),
-          field.defaultValue || "",
+          field.defaultValue || ""
         ])
       ),
     },
@@ -85,7 +85,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
     try {
       const customFieldResponses = (customFields || []).map(field => ({
         fieldId: field._id,
-        value: values[field._id.toString()],
+        value: values[field._id.toString()] || ""  // Ensure value is never undefined
       }));
 
       await createAppointment({
@@ -96,7 +96,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
         customerPhone: values.phone,
         date: values.date,
         time: values.time,
-        notes: values.notes,
+        notes: values.notes || "",
         customFields: customFieldResponses,
       });
 
@@ -132,6 +132,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                   <Input
                     placeholder={field.placeholder}
                     {...formField}
+                    value={formField.value || ""} // Ensure value is never undefined
                   />
                 </FormControl>
               )}
@@ -141,6 +142,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                     type="number"
                     placeholder={field.placeholder}
                     {...formField}
+                    value={formField.value || ""} // Ensure value is never undefined
                   />
                 </FormControl>
               )}
@@ -150,6 +152,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                     type="email"
                     placeholder={field.placeholder}
                     {...formField}
+                    value={formField.value || ""} // Ensure value is never undefined
                   />
                 </FormControl>
               )}
@@ -159,6 +162,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                     type="tel"
                     placeholder={field.placeholder}
                     {...formField}
+                    value={formField.value || ""} // Ensure value is never undefined
                   />
                 </FormControl>
               )}
@@ -167,6 +171,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                   <Textarea
                     placeholder={field.placeholder}
                     {...formField}
+                    value={formField.value || ""} // Ensure value is never undefined
                   />
                 </FormControl>
               )}
@@ -244,7 +249,11 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
             <FormItem>
               <FormLabel>Name *</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input 
+                  placeholder="Enter your name" 
+                  {...field} 
+                  value={field.value || ""} // Ensure value is never undefined
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -258,7 +267,12 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
             <FormItem>
               <FormLabel>Email *</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Enter your email" {...field} />
+                <Input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  {...field} 
+                  value={field.value || ""} // Ensure value is never undefined
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -272,7 +286,12 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
             <FormItem>
               <FormLabel>Phone *</FormLabel>
               <FormControl>
-                <Input type="tel" placeholder="Enter your phone number" {...field} />
+                <Input 
+                  type="tel" 
+                  placeholder="Enter your phone number" 
+                  {...field} 
+                  value={field.value || ""} // Ensure value is never undefined
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -286,7 +305,11 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
             <FormItem>
               <FormLabel>Date *</FormLabel>
               <FormControl>
-                <Input type="date" {...field} />
+                <Input 
+                  type="date" 
+                  {...field} 
+                  value={field.value || ""} // Ensure value is never undefined
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -300,7 +323,11 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
             <FormItem>
               <FormLabel>Time *</FormLabel>
               <FormControl>
-                <Input type="time" {...field} />
+                <Input 
+                  type="time" 
+                  {...field} 
+                  value={field.value || ""} // Ensure value is never undefined
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -319,6 +346,7 @@ export function BookingForm({ providerId, serviceId, initialDate = "", initialTi
                 <Textarea
                   placeholder="Any additional notes or requests"
                   {...field}
+                  value={field.value || ""} // Ensure value is never undefined
                 />
               </FormControl>
               <FormMessage />
