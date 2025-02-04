@@ -25,10 +25,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 interface BookingFormProps {
   providerId: Id<"providers">;
   serviceId: Id<"services">;
-  onSuccess: () => void;
+  initialDate?: string;
+  initialTime?: string;
+  onClose?: () => void;
 }
 
-export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormProps) {
+export function BookingForm({ providerId, serviceId, initialDate = "", initialTime = "", onClose }: BookingFormProps) {
   const { toast } = useToast();
   const customFields = useQuery(api.formFields.getFieldsForService, { serviceId });
 
@@ -65,8 +67,8 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
       name: "",
       email: "",
       phone: "",
-      date: "",
-      time: "",
+      date: initialDate || "",
+      time: initialTime || "",
       notes: "",
       ...Object.fromEntries(
         (customFields || []).map(field => [
@@ -103,7 +105,7 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
         description: "Your appointment has been booked!",
       });
 
-      onSuccess();
+      onClose?.();
     } catch (error) {
       toast({
         title: "Error",
@@ -221,6 +223,20 @@ export function BookingForm({ providerId, serviceId, onSuccess }: BookingFormPro
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {onClose && (
+          <div className="flex justify-end">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="mb-2"
+            >
+              ✕
+            </Button>
+          </div>
+        )}
+
         <FormField
           control={form.control}
           name="name"

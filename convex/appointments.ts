@@ -149,4 +149,20 @@ export const getAppointmentDetails = query({
       time: appointment.startTime.split('T')[1].substring(0, 5)
     };
   },
+});
+
+export const getAppointmentsForDay = query({
+  args: {
+    providerId: v.id("providers"),
+    date: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const appointments = await ctx.db
+      .query("appointments")
+      .filter((q) => q.eq(q.field("providerId"), args.providerId))
+      .filter((q) => q.eq(q.field("date"), args.date))
+      .collect();
+
+    return appointments;
+  },
 }); 

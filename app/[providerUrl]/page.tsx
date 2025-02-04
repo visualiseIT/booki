@@ -1,27 +1,12 @@
 "use client";
 
 import { api } from "@/convex/_generated/api";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery } from "convex/react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { notFound } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { use } from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useToast } from "@/components/ui/use-toast";
-import { BookingForm } from "./components/BookingForm";
-
-interface BookingFormData {
-  name: string;
-  email: string;
-  notes?: string;
-  date: string;
-  time: string;
-}
 
 export default function BookingPage({
   params,
@@ -29,21 +14,11 @@ export default function BookingPage({
   params: Promise<{ providerUrl: string }>;
 }) {
   const { providerUrl } = use(params);
-  const { toast } = useToast();
-  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
-  
+  const router = useRouter();
   const provider = useQuery(api.providers.getProviderByUrl, { customUrl: providerUrl });
   const services = useQuery(api.services.getServices, 
     provider ? { providerId: provider._id } : "skip"
   );
-  const createAppointment = useMutation(api.appointments.createAppointment);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting }
-  } = useForm<BookingFormData>();
 
   // Show 404 if provider not found
   if (provider === null) {
@@ -65,70 +40,6 @@ export default function BookingPage({
       </div>
     );
   }
-
-  const onSubmit = async (data: BookingFormData, event?: React.BaseSyntheticEvent) => {
-    // Prevent default form submission
-    event?.preventDefault();
-
-    if (!selectedServiceId) {
-      console.error('No service selected');
-      return;
-    }
-    
-    const selectedService = services?.find(s => s._id === selectedServiceId);
-    if (!selectedService) {
-      console.error('Selected service not found');
-      return;
-    }
-
-    try {
-      // Combine date and time
-      const startTime = new Date(`${data.date}T${data.time}`).toISOString();
-      const endTime = new Date(`${data.date}T${data.time}`);
-      endTime.setMinutes(endTime.getMinutes() + selectedService.duration);
-
-      const appointmentData = {
-        providerId: provider._id,
-        serviceId: selectedService._id,
-        customerName: data.name,
-        customerEmail: data.email,
-        startTime,
-        endTime: endTime.toISOString(),
-        notes: data.notes
-      };
-
-      console.log('Creating appointment with data:', appointmentData);
-
-      // Close the modal before making the API call
-      setSelectedServiceId(null);
-      
-      const appointment = await createAppointment(appointmentData);
-      console.log('Appointment created:', appointment);
-
-      // Reset form after successful creation
-      reset();
-
-      // Show success toast
-      toast({
-        title: "Success",
-        description: "Your appointment has been scheduled successfully.",
-        variant: "default",
-        duration: 5000,
-        className: "booking-success-toast"
-      });
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-
-      // Show detailed error message
-      toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to schedule appointment. Please try again.",
-        variant: "destructive",
-        duration: 5000,
-        className: "booking-error-toast"
-      });
-    }
-  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -152,27 +63,11 @@ export default function BookingPage({
                       <p>${service.price}</p>
                     </div>
                   </div>
-                  <Dialog 
-                    open={selectedServiceId === service._id} 
-                    onOpenChange={(open) => setSelectedServiceId(open ? service._id : null)}
+                  <Button 
+                    onClick={() => router.push(`/${providerUrl}/services/${service._id}`)}
                   >
-                    <DialogTrigger asChild>
-                      <Button>Book</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Book {service.name}</DialogTitle>
-                        <DialogDescription>
-                          Fill in your details to schedule an appointment.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <BookingForm
-                        providerId={provider._id}
-                        serviceId={service._id}
-                        onSuccess={() => setSelectedServiceId(null)}
-                      />
-                    </DialogContent>
-                  </Dialog>
+                    Book
+                  </Button>
                 </div>
               </div>
             ))}
