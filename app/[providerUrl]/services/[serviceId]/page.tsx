@@ -35,8 +35,8 @@ export default function ServiceBookingPage({ params }: { params: Promise<{ provi
       : "skip"
   )
 
-  // Calculate available slots for a given date
-  const getAvailableSlotsForDate = (date: Date) => {
+  // Generate all possible time slots and their availability
+  const generateTimeSlots = () => {
     if (!service) return []
     
     const slots = []
@@ -63,19 +63,20 @@ export default function ServiceBookingPage({ params }: { params: Promise<{ provi
           )
         })
 
-        if (!isBooked) {
-          slots.push(timeString)
-        }
+        slots.push({
+          time: timeString,
+          isAvailable: !isBooked
+        })
       }
     }
     
     return slots
   }
 
-  // Get available slots for selected date
-  const availableSlots = useMemo(() => {
+  // Get all time slots for selected date
+  const timeSlots = useMemo(() => {
     if (!selectedDate) return []
-    return getAvailableSlotsForDate(selectedDate)
+    return generateTimeSlots()
   }, [selectedDate, appointments, service])
 
   // Calculate day availability status
@@ -83,7 +84,7 @@ export default function ServiceBookingPage({ params }: { params: Promise<{ provi
     // Past dates are always shown as past
     if (date < new Date(new Date().setHours(0, 0, 0, 0))) return "past"
     
-    const slots = getAvailableSlotsForDate(date)
+    const slots = generateTimeSlots()
     const totalPossibleSlots = Math.floor((17 - 9) * (60 / service!.duration))
     const availabilityRatio = slots.length / totalPossibleSlots
 
@@ -169,12 +170,12 @@ export default function ServiceBookingPage({ params }: { params: Promise<{ provi
                     variant="ghost"
                     className={cn(
                       "h-12 sm:h-16 p-0 font-normal hover:bg-gray-100 relative",
-                      isSelected && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
+                      isSelected && "ring-2 ring-primary ring-offset-2",
                       isPast && "bg-gray-50 text-gray-400 cursor-not-allowed hover:bg-gray-50",
-                      availability === "mostly-available" && !isPast && "bg-green-50 text-green-700 hover:bg-green-100",
-                      availability === "partially-booked" && !isPast && "bg-yellow-50 text-yellow-700 hover:bg-yellow-100",
-                      availability === "fully-booked" && !isPast && "bg-red-50 text-red-700 hover:bg-red-100",
-                      isToday(day) && !isSelected && "border-2 border-primary"
+                      !isSelected && !isPast && availability === "mostly-available" && "bg-green-50 text-green-700 hover:bg-green-100",
+                      !isSelected && !isPast && availability === "partially-booked" && "bg-yellow-50 text-yellow-700 hover:bg-yellow-100",
+                      !isSelected && !isPast && availability === "fully-booked" && "bg-red-50 text-red-700 hover:bg-red-100",
+                      isToday(day) && !isSelected && "ring-2 ring-gray-200"
                     )}
                     disabled={isPast}
                     onClick={() => !isPast && setSelectedDate(day)}
@@ -200,19 +201,23 @@ export default function ServiceBookingPage({ params }: { params: Promise<{ provi
           <div>
             <h2 className="text-lg font-semibold mb-4">Available Time Slots</h2>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-              {availableSlots.map((time) => (
+              {timeSlots.map(({ time, isAvailable }) => (
                 <Button
                   key={time}
                   variant="outline"
-                  onClick={() => handleTimeSelect(time)}
-                  className="w-full"
+                  onClick={() => isAvailable && handleTimeSelect(time)}
+                  disabled={!isAvailable}
+                  className={cn(
+                    "w-full",
+                    !isAvailable && "opacity-50 cursor-not-allowed bg-gray-50"
+                  )}
                 >
                   {time}
                 </Button>
               ))}
-              {availableSlots.length === 0 && (
+              {timeSlots.length === 0 && (
                 <p className="col-span-full text-center text-gray-500 py-4">
-                  No available slots for this date
+                  No time slots available for this date
                 </p>
               )}
             </div>
