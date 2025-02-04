@@ -126,8 +126,8 @@ export const getUpcomingAppointments = query({
 
     return appointments.map(appointment => ({
       ...appointment,
-      date: appointment.startTime.split('T')[0],
-      time: appointment.startTime.split('T')[1].substring(0, 5)
+      date: appointment.date || appointment.startTime?.split('T')[0] || "",
+      time: appointment.time || appointment.startTime?.split('T')[1]?.substring(0, 5) || ""
     }));
   },
 });
